@@ -1,9 +1,12 @@
 <?php
-$host = '192.168.1.17';
-$port = '1521';
-$service_name = 'orcl';
-$username = 'hr'; 
-$password = 'oracle'; 
+
+$config = require_once __DIR__ . '/config/db_config.php';
+
+$host = $config['db_host'];
+$port = $config['db_port'];
+$service_name = $config['db_service_name'];
+$username = $config['db_username'];
+$password = $config['db_password'];
 
 try {
 $dsn = "oci:dbname=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=$host)(PORT=$port)))(CONNECT_DATA=(SERVICE_NAME=$service_name)))";
