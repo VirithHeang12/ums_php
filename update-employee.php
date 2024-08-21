@@ -21,6 +21,6 @@ try {
 
     header('Location: list-all-employees.php');
 } catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+    // echo "Error: " . $e->getMessage();
 }
 
