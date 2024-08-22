@@ -9,7 +9,7 @@ $email = $_POST['email'] ?? '';
 $jobId = $_POST['job_id'] ?? '';
 
 try {
-    $statement = $pdo->prepare("UPDATE employees SET first_name = :first_name, last_name = :last_name, email = :email WHERE employee_id = :employee_id");
+    $statement = $pdo->prepare("UPDATE employees_copy SET first_name = :first_name, last_name = :last_name, email = :email WHERE employee_id = :employee_id");
 
     $statement->bindParam(':employee_id', $employeeId, PDO::PARAM_INT);
     $statement->bindParam(':first_name', $firstName, PDO::PARAM_STR);

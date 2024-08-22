@@ -5,7 +5,7 @@ try {
     $firstName = $_GET['first_name'] ?? '';
     $firstName = '%' . $firstName . '%';
 
-    $statement = $pdo->prepare("SELECT employee_id, first_name, last_name, phone_number, email FROM employees WHERE first_name like :name ORDER BY employee_id" );
+    $statement = $pdo->prepare("SELECT employee_id, first_name, last_name, phone_number, email FROM employees_copy WHERE first_name like :name ORDER BY employee_id" );
 
     $statement->bindParam(':name', $firstName, PDO::PARAM_STR);
 
@@ -46,7 +46,7 @@ try {
                 <td><?php echo $row['EMAIL']; ?></td>
                 <td>
                     <a href="edit-employee.php?id=<?php echo $row['EMPLOYEE_ID']; ?>">Edit</a>
-                    <!-- <a href="delete-employee.php?id=<?php echo $row['EMPLOYEE_ID']; ?>">Delete</a> -->
+                    <a href="delete-employee.php?id=<?php echo $row['EMPLOYEE_ID']; ?>">Delete</a>
                 </td>
             </tr>
         <?php endforeach; ?>

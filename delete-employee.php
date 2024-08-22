@@ -1,3 +1,10 @@
+<?php 
+
+$employeeId = $_GET['id'] ?? '';
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +13,7 @@
     <title>Document</title>
 </head>
 <body>
-    <ul>
-        <li><a href="list-all-employees.php">List All Employees</a></li>
-        <li><a href="create-employee.php">Create Employee</a></li>
-    </ul>
+    <a href="destroy-employee.php?id=<?php echo $employeeId ?>">Confirm</a>
+    <a href="list-all-employees.php">Cancel</a>
 </body>
 </html>
