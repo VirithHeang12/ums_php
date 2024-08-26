@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once __DIR__ . '/../config/database_connection.php';
 
@@ -13,5 +13,3 @@ try {
 } catch (PDOException $e) {
     echo "Error while deleting student: " . $e->getMessage();
 }
-
-?>

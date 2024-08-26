@@ -14,7 +14,6 @@ try {
     $statement->bindParam(':student_number', $student_number);
     $statement->execute();
     $enrolls = $statement->fetchAll();
-
 } catch (PDOException $e) {
     echo "Error while retrieving student: " . $e->getMessage();
 }
@@ -23,12 +22,14 @@ try {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Show Student</title>
     <link rel="stylesheet" href="/ums_php/bootstrap-5.3.3-dist/css/bootstrap.min.css">
 </head>
+
 <body>
     <h1 class="text-center">Show Student</h1>
     <div class="container">
@@ -78,11 +79,11 @@ try {
                             <td><?php echo $enroll['ENROLL_GRADE']; ?></td>
                         </tr>
                     <?php endforeach; ?>
-                <a href="index.php" class="btn btn-primary">Back</a>
+                    <a href="index.php" class="btn btn-primary">Back</a>
             </div>
         </div>
     </div>
     <script src="/ums_php/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
 
+</html>

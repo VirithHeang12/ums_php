@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Student</title>
 </head>
+
 <body>
     <h1>Create Student</h1>
     <a href="index.php">Back</a>
@@ -30,4 +32,6 @@
         <button type="submit">Create</button>
     </form>
 </body>
+<<<<<<< HEAD=======>>>>>>> 29b5da968d4a908cfe20c5d9c6eff8c9ebb87c86
+
 </html>

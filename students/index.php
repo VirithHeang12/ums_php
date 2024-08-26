@@ -13,18 +13,21 @@ try {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Students</title>
     <link rel="stylesheet" href="/ums_php/bootstrap-5.3.3-dist/css/bootstrap.min.css">
     <style>
-        td, th {
+        td,
+        th {
             border: 1px solid black;
             padding: 8px;
         }
     </style>
 </head>
+
 <body>
     <h1 class="text-center">God Students</h1>
     <a href="create.php" class="btn btn-primary mb-5 mx-5">Create Student</a>
@@ -58,4 +61,5 @@ try {
     </table>
     <script src="/ums_php/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
