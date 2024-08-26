@@ -5,7 +5,7 @@ require_once 'database_connection.php';
 $employeeId = $_GET['id'] ?? '';
 
 try {
-    $statement = $pdo->prepare("SELECT employee_id, first_name, last_name, email, job_id FROM employees WHERE employee_id = :employee_id");
+    $statement = $pdo->prepare("SELECT employee_id, first_name, last_name, email, job_id FROM employees_copy WHERE employee_id = :employee_id");
 
     $statement->bindParam(':employee_id', $employeeId, PDO::PARAM_INT);
 

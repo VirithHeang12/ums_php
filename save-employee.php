@@ -10,7 +10,7 @@ $jobId = $_POST['job_id'] ?? '';
 
 
 try {
-    $statement = $pdo->prepare("INSERT INTO employees (employee_id, first_name, last_name, email, job_id) VALUES (:employee_id, :first_name, :last_name, :email, :job_id)");
+    $statement = $pdo->prepare("INSERT INTO employees_copy (employee_id, first_name, last_name, email, job_id) VALUES (:employee_id, :first_name, :last_name, :email, :job_id)");
 
     $statement->bindParam(':employee_id', $employeeId, PDO::PARAM_INT);
     $statement->bindParam(':first_name', $firstName, PDO::PARAM_STR);
