@@ -29,25 +29,31 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    <form action="update.php" method="post">
-    <label for="dept_code">Course Code</label>
-        <input type="text" name="crs_code" id="crs_code" value="<?php echo $crs_code ?>" readonly>
+   <div class="container">
+    <div class="col-6">
+    <form action="update.php" method="post" class="form mx-auto">
+        <label for="dept_code" class="form-label">Course Code</label>
+        <input type="text" class="form-control mb-2" name="crs_code" id="crs_code" value="<?php echo $crs_code ?>" readonly>
         <br><br>
-        <label for="dept_code">Department Code:</label>
-        <input type="text" name="dept_code" id="dept_code" value="<?php echo $dept_code ?>"  >
+        <label for="dept_code" class="form-label">Department Code:</label>
+        <input type="text" class="form-control mb-2" name="dept_code" id="dept_code" value="<?php echo $dept_code ?>"  >
         <br><br>
-        <label for="crs_title">Course Title</label>
-        <input type="text" name="crs_title" id="crs_title" value="<?php echo $crs_title ?>">
+        <label for="crs_title" class="form-label">Course Title</label>
+        <input type="text" class="form-control mb-2" name="crs_title" id="crs_title" value="<?php echo $crs_title ?>">
         <br><br>
-        <label for="crs_description">Course Description</label>
-        <input type="text" name="crs_description" id="crs_description" value="<?php echo $crs_description ?>">
+        <label for="crs_description" class="form-label">Course Description</label>
+        <input type="text" class="form-control mb-2" name="crs_description" id="crs_description" value="<?php echo $crs_description ?>">
         <br><br>
-        <label for="crs_credit">Course Credit</label>
-        <input type="text" name="crs_credit" id="crs_credit" value="<?php echo $crs_credit ?>">
+        <label for="crs_credit" class="form-label">Course Credit</label>
+        <input type="text" class="form-control mb-2" name="crs_credit" id="crs_credit" value="<?php echo $crs_credit ?>">
         <br><br>
-        <button type="submit">Update</button>
+        <button type="submit" class="btn btn-primary">Update</button>
     </form>
+    </div>
+   </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
