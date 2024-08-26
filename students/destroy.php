@@ -1,6 +1,6 @@
 <?php 
 
-require_once __DIR__ . '/../database_connection.php';
+require_once __DIR__ . '/../config/database_connection.php';
 
 $student_number = $_GET['id'];
 

@@ -1,6 +1,6 @@
 <?php 
 
-require_once __DIR__ . '/../database_connection.php';
+require_once __DIR__ . '/../config/database_connection.php';
 
 $school_name = $_POST['school_name'] ?? '';
 $prof_num = $_POST['prof_num'] ?? '';

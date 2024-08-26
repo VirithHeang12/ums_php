@@ -1,6 +1,6 @@
 <?php 
 
-require_once __DIR__ . '/../database_connection.php';
+require_once __DIR__ . '/../config/database_connection.php';
 
 $crs_code = $_POST['crs_code'] ?? '';
 $dept_code = $_POST['dept_code'] ?? '';
