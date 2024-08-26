@@ -1,18 +1,17 @@
-<?php 
+<?php
 require_once 'database_connection.php';
 
 try {
     $firstName = $_GET['first_name'] ?? '';
     $firstName = '%' . $firstName . '%';
 
-    $statement = $pdo->prepare("SELECT employee_id, first_name, last_name, phone_number, email FROM employees WHERE first_name like :name ORDER BY employee_id" );
+    $statement = $pdo->prepare("SELECT employee_id, first_name, last_name, phone_number, email FROM employees WHERE first_name like :name ORDER BY employee_id");
 
     $statement->bindParam(':name', $firstName, PDO::PARAM_STR);
 
     $statement->execute();
 
     $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-    
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
@@ -20,11 +19,13 @@ try {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <a href="index.php">Back</a>
     <h1>Oracle Database Connection</h1>
@@ -52,4 +53,5 @@ try {
         <?php endforeach; ?>
     </table>
 </body>
+
 </html>

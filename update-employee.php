@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once 'database_connection.php';
 
@@ -23,4 +23,3 @@ try {
 } catch (PDOException $e) {
     // echo "Error: " . $e->getMessage();
 }
-
