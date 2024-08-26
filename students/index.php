@@ -17,6 +17,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Students</title>
+    <link rel="stylesheet" href="/ums_php/bootstrap-5.3.3-dist/css/bootstrap.min.css">
     <style>
         td, th {
             border: 1px solid black;
@@ -25,9 +26,9 @@ try {
     </style>
 </head>
 <body>
-    <h1>God Students</h1>
-    <a href="create.php">Create Student</a>
-    <table>
+    <h1 class="text-center">God Students</h1>
+    <a href="create.php" class="btn btn-primary mb-5 mx-5">Create Student</a>
+    <table class="table">
         <tr>
             <th>STUDENT NUMBER</th>
             <th>DEPARTMENT CODE</th>
@@ -48,12 +49,13 @@ try {
                 <td><?php echo $row['STU_EMAIL']; ?></td>
                 <td><?php echo $row['PROF_NUM']; ?></td>
                 <td>
-                    <a href="students/show.php?id=<?php echo $row['STU_NUM']; ?>">SHOW</a>
-                    <a href="students/edit.php?id=<?php echo $row['STU_NUM']; ?>">EDIT</a>
-                    <a href="students/delete.php?id=<?php echo $row['STU_NUM']; ?>">DELETE</a>
+                    <a href="show.php?id=<?php echo $row['STU_NUM']; ?>">SHOW</a>
+                    <a href="edit.php?id=<?php echo $row['STU_NUM']; ?>">EDIT</a>
+                    <a href="delete.php?id=<?php echo $row['STU_NUM']; ?>">DELETE</a>
                 </td>
             </tr>
         <?php endforeach; ?>
     </table>
+    <script src="/ums_php/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
