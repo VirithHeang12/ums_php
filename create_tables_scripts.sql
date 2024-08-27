@@ -28,16 +28,6 @@ create table departments
     constraint pk_departments primary key(dept_code)
 );
 
-create table semesters
-(
-    semester_code int generated always as identity,
-    semester_year int not null,
-    semester_term int not null,
-    semester_start_date date not null,
-    semester_end_date date not null,
-    constraint pk_semesters primary key(semester_code)
-);
-
 create table courses(
     crs_code int generated always as identity,
     dept_code int not null,
