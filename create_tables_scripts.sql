@@ -112,3 +112,4 @@ create table users
     role_id int not null,
     constraint uk_entity_type_entity_id unique(entity_type, entity_id)
 );
+

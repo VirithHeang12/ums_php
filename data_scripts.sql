@@ -85,3 +85,8 @@ INSERT INTO users (username, password, entity_type, entity_id, role_id) VALUES
 
 INSERT INTO users (username, password, entity_type, entity_id, role_id) VALUES
 ('student_user', 'stu_pass', 'Student', 1, 3);
+
+
+
+
+
