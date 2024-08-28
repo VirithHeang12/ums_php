@@ -69,6 +69,12 @@ INSERT INTO classes (class_section, class_time, crs_code, prof_num, room_code, s
 INSERT INTO classes (class_section, class_time, crs_code, prof_num, room_code, semester_code) VALUES
 (102, '10:00-11:30', 2, 2, 2, 2);
 
+INSERT INTO classes (class_section, class_time, crs_code, prof_num, room_code, semester_code) VALUES
+(103, '02:00-03:30', 2, 1, 2, 1);
+
+INSERT INTO classes (class_section, class_time, crs_code, prof_num, room_code, semester_code) VALUES
+(104, '02:00-03:30', 2, 2, 2, 1);
+
 -- Insert into enrolls
 INSERT INTO enrolls (class_code, stu_num, enroll_date, enroll_grade) VALUES
 (1, 1, TO_DATE('2024-01-15', 'YYYY-MM-DD'), 'A');
