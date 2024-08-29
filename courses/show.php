@@ -20,8 +20,8 @@ try {
     echo "Error while retrieving course: " . $e->getMessage();
 }
 
-?>
-
+?>  
+    
 <!DOCTYPE html>
 <html lang="en">
 
