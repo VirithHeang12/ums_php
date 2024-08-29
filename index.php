@@ -19,6 +19,7 @@
                     <li><a href="rooms">បន្ទប់</a></li>
                     <li><a href="courses">វគ្គសិក្សា</a></li>
                     <li><a href="schools">សាលា</a></li>
+                    <li><a href="classes">ថ្នាក់រៀន</a></li>
                     <li><a href="authentication/register.php">ចុះឈ្មោះ</a></li>
                 </ul>
             </nav>
