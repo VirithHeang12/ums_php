@@ -103,3 +103,12 @@ create table users
     constraint uk_entity_type_entity_id unique(entity_type, entity_id)
 );
 
+create table semesters
+(
+    semester_code int generated always as identity,
+    semester_year int not null,
+    semester_term int not null,
+    semester_start_date date not null,
+    semester_end_date date not null,
+    constraint pk_semesters primary key(semester_code)
+);
