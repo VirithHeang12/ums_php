@@ -11,7 +11,6 @@ try {
     $statement = $pdo->prepare("SELECT * FROM students");
     $statement->execute();
     $students = $statement->fetchAll();
-
 } catch (PDOException $e) {
     echo "Error while retrieving professors: " . $e->getMessage();
 }
@@ -62,8 +61,8 @@ try {
             </tr>
         <?php endforeach; ?>
     </table>
-    
-<table>
+
+    <table>
         <tr>
             <th>PROFESSOR NUMBER</th>
             <th>DEPARTMENT CODE</th>
@@ -89,5 +88,3 @@ try {
 </body>
 
 </html>
-
-
