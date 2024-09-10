@@ -22,6 +22,7 @@
                     <li><a href="classes">ថ្នាក់រៀន</a></li>
                     <li><a href="departments">Department</a></li>
                     <li><a href="authentication/register.php">ចុះឈ្មោះ</a></li>
+                    <li><a href="authentication/login.php">ចូល</a></li>
                 </ul>
             </nav>
         </div>
