@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/../models/CRUDable.php';
+
 class Semester implements CRUDable
 {
     private PDO $pdo;
