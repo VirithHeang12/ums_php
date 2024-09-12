@@ -11,7 +11,7 @@
 <body>
     <div class="container py-5">
         <h1 class="text-center fw-bold text-uppercase">Create Semester</h1>
-        <form action="save.php" method="POST" class="form col-6 mx-auto mt-4">
+        <form action="save.php" method="POST" class="form col-6 mx-auto mt-4" enctype="multipart/form-data">
             <label for="semester_year" class="form-label fw-medium">Semester Year</label>
             <input type="text" name="semester_year" id="semester_year" class="form-control mb-3" placeholder="e.g. 2024">
 
@@ -36,6 +36,8 @@
             
             <label for="semester_end_date" class="form-label fw-medium">End Date</label>
             <input type="date" name="semester_end_date" id="semester_end_date" class="form-control mb-3">
+
+            <input type="file" name="file" id="file" class="form-control mb-3">
             
             <div class="hstack justify-content-between my-4">
                 <a href="index.php" class="btn btn-outline-dark px-4 fw-semibold">Back</a>

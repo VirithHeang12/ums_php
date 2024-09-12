@@ -3,10 +3,13 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../models/CRUDable.php';
+require_once __DIR__ . '/../models/Media.php';
 
 class Semester implements CRUDable
 {
     private PDO $pdo;
+    private Media $media;
+    private $file;
 
     private int $semester_code;
     private int $semester_year;
@@ -14,13 +17,16 @@ class Semester implements CRUDable
     private string $semester_start_date;
     private string $semester_end_date;
 
-    public function __construct(PDO $pdo, int $semester_year, int $semester_term, string $semester_start_date, string $semester_end_date)
+    public function __construct(PDO $pdo, int $semester_year, int $semester_term, string $semester_start_date, string $semester_end_date, $file)
     {
         $this->pdo = $pdo;
+        $this->media = new Media();
+        $this->file = $file;
         $this->semester_year = $semester_year;
         $this->semester_term = $semester_term;
         $this->semester_start_date = $semester_start_date;
         $this->semester_end_date = $semester_end_date;
+
     }
 
     // generate getter and setter
@@ -79,6 +85,7 @@ class Semester implements CRUDable
     {
         try {
             $this->pdo->beginTransaction();
+             
             $statement = $this->pdo->prepare("INSERT INTO semesters (semester_year, semester_term, semester_start_date, semester_end_date) 
             VALUES (:semester_year, :semester_term, (TO_DATE(:semester_start_date, 'YYYY-MM-DD')), (TO_DATE(:semester_end_date, 'YYYY-MM-DD')))");
 
@@ -88,8 +95,19 @@ class Semester implements CRUDable
             $statement->bindParam(':semester_end_date', $this->semester_end_date, PDO::PARAM_STR);
 
             $statement->execute();
+
+            $statement = $this->pdo->prepare(
+                "SELECT semester_code FROM semesters ORDER BY semester_code DESC OFFSET 0 ROW FETCH NEXT 1 ROW ONLY");
+
+            $statement->execute();
+
+            $this->semester_code = (int) $statement->fetch()['SEMESTER_CODE'];
+
+            $this->media->save($this->file, $this->pdo, "attachment", $this->semester_code, "semester");
+
             $this->pdo->commit();
-            header('Location: index.php?');
+
+            header('Location: index.php');
         } catch (PDOException $e) {
             $this->pdo->rollBack();
             echo "Error: " . $e->getMessage();

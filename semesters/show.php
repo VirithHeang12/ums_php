@@ -1,6 +1,7 @@
 <?php require_once __DIR__ . '/../database/database_connection.php';
 
 $semester_code = $_GET['id'];
+$entity_type = 'semester';
 try {
     $statement = $pdo->prepare("SELECT * FROM semesters WHERE semester_code = :semester_code");
     $statement->bindParam(':semester_code', $semester_code);
@@ -10,6 +11,14 @@ try {
     $statement = $pdo->prepare("SELECT * FROM classes WHERE semester_code = :semester_code");
     $statement->bindParam(':semester_code', $semester_code);
     $statement->execute();
+
+    $attachment = $pdo->prepare("SELECT * FROM medias WHERE entity_id = :entity_id AND entity_type = :entity_type");
+    $attachment->bindParam(':entity_id', $semester_code);
+    $attachment->bindParam(':entity_type', $entity_type);
+    $attachment->execute();
+    $attachment = $attachment->fetch();
+
+
     $classes = $statement->fetchAll();
 } catch (PDOException $e) {
     echo "Error while retrieving semester:" . $e->getMessage();
@@ -54,6 +63,21 @@ try {
                     <tr>
                         <th class="col-5">END DATE</th>
                         <td><?php echo date('F d, Y', strtotime($semester['SEMESTER_END_DATE'])); ?></td>
+                    </tr>
+                    <tr>
+                        <th class="col-5">ATTACHMENT</th>
+                        <td>
+                            <?php if ($attachment) : ?>
+                                <?php if ($attachment['MEDIA_TYPE'] === 'image') : ?>
+                                    <img src="./../images/<?php echo $attachment['MEDIA_URL']; ?>" alt="Attachment" class="img-fluid">
+                                <?php elseif ($attachment['MEDIA_TYPE'] === 'attachment') : ?>
+                                    <a href="./../images/<?php echo $attachment['MEDIA_URL']; ?>" target="_blank">មើល</a>
+                                <?php endif; ?>
+
+                            <?php else : ?>
+                                No attachment
+                            <?php endif; ?>
+                        </td>
                     </tr>
                 </table>
             </div>

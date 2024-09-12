@@ -112,3 +112,13 @@ create table semesters
     semester_end_date date not null,
     constraint pk_semesters primary key(semester_code)
 );
+
+create table medias
+(
+    media_id int generated always as identity,
+    media_type varchar2(50) not null,
+    media_url varchar2(255) not null,
+    entity_type varchar2(100) not null,
+    entity_id int not null,
+    constraint pk_medias primary key(media_id)
+);
