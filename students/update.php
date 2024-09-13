@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../config/database_connection.php';
+require_once __DIR__ . '/../database/database_connection.php';
 
 var_dump($_POST);
 $stu_num = $_POST['stu_num'];

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap');
+
 /* Reset some default styles */
 body, h1, h2, p, ul, li {
     margin: 0;
@@ -12,7 +14,7 @@ html, body {
 
 /* Basic styling for the body */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Kantumruy Pro', Arial, sans-serif;
     line-height: 1.6;
     color: #333;
     background-color: #f4f4f4;
@@ -104,3 +106,4 @@ footer {
     padding: 1rem 0;
     text-align: center;
 }
+

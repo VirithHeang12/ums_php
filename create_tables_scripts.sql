@@ -28,16 +28,6 @@ create table departments
     constraint pk_departments primary key(dept_code)
 );
 
-create table semesters
-(
-    semester_code int generated always as identity,
-    semester_year int not null,
-    semester_term int not null,
-    semester_start_date date not null,
-    semester_end_date date not null,
-    constraint pk_semesters primary key(semester_code)
-);
-
 create table courses(
     crs_code int generated always as identity,
     dept_code int not null,
@@ -111,4 +101,24 @@ create table users
     entity_id int not null,
     role_id int not null,
     constraint uk_entity_type_entity_id unique(entity_type, entity_id)
+);
+
+create table semesters
+(
+    semester_code int generated always as identity,
+    semester_year int not null,
+    semester_term int not null,
+    semester_start_date date not null,
+    semester_end_date date not null,
+    constraint pk_semesters primary key(semester_code)
+);
+
+create table medias
+(
+    media_id int generated always as identity,
+    media_type varchar2(50) not null,
+    media_url varchar2(255) not null,
+    entity_type varchar2(100) not null,
+    entity_id int not null,
+    constraint pk_medias primary key(media_id)
 );

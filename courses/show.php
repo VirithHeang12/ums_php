@@ -1,14 +1,13 @@
 <?php 
 
-
-require_once __DIR__ . '/../config/db_config.php';
+require_once __DIR__ . '/../database/database_connection.php';
 
 $crs_code = $_GET['id'];
 
 try {
     $statement = $pdo->prepare("SELECT c.*, d.dept_name 
         FROM courses c 
-        LEFT JOIN departments d ON c.dept_code = d.dept_code");
+         JOIN departments d ON c.dept_code = d.dept_code WHERE CRS_CODE = :crs_code");
     $statement->bindParam(':crs_code', $crs_code);
     $statement->execute();
     $course = $statement->fetch();
@@ -21,8 +20,8 @@ try {
     echo "Error while retrieving course: " . $e->getMessage();
 }
 
-?>
-
+?>  
+    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,6 +34,7 @@ try {
 </head>
 
 <body>
+<a href="index.php" class="btn btn-primary m-5">Back</a>
     <h1 class="text-center">Show Course</h1>
     <div class="container">
         <div class="row">
@@ -45,7 +45,7 @@ try {
                         <td><?php echo $course['CRS_CODE'] ?></td>
                     </tr>
                     <tr>
-                        <th>DEPARTMENT CODE</th>
+                        <th>DEPARTMENT NAME</th>
                         <td><?php echo $course['DEPT_NAME']; ?></td>
                     </tr>
                     <tr>
@@ -75,7 +75,7 @@ try {
                             <td><?php echo $class['CLASS_TIME']; ?></td>
                         </tr>
                     <?php endforeach; ?>
-                    <a href="index.php" class="btn btn-primary">Back</a>
+                  
             </div>
         </div>
     </div>

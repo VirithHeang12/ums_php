@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../config/database_connection.php';
+require_once __DIR__ . '/../database/database_connection.php';
 
 try {
     $statement = $pdo->prepare("SELECT * FROM students");

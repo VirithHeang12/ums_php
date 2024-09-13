@@ -1,10 +1,10 @@
 <?php 
 
-require_once __DIR__ . '/../config/database_connection.php';
+require_once __DIR__ . '/../database/database_connection.php';
 
-$dept_code = $_POST['dept_code'] ?? '';
+$dept_code =  $_POST['dept_code'] ?? 0;
 $prof_specialty = $_POST['prof_specialty'] ?? '';
-$prof_rank = $_POST['prof_rank'] ?? '';
+$prof_rank =  $_POST['prof_rank'] ?? 0; 
 $prof_fname = $_POST['prof_fname'] ?? '';
 $prof_initial = $_POST['prof_initial'] ?? '';
 $prof_lname = $_POST['prof_lname'] ?? '';
@@ -28,7 +28,9 @@ try {
     $pdo->commit();
 
     header('Location: index.php');
+    exit();
 } catch (PDOException $e) {
     $pdo->rollBack();
     echo "Error: " . $e->getMessage();
 }
+?>

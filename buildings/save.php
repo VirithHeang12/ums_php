@@ -1,6 +1,5 @@
 <?php
-
-require_once __DIR__ . '/../database_connection.php';
+require_once __DIR__ . '/../database/database_connection.php';
 
 $bldg_name = $_POST['bldg_name'] ?? '';
 $bldg_location = $_POST['bldg_location'] ?? '';
