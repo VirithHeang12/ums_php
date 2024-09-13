@@ -6,7 +6,7 @@ $crs_code = $_POST['crs_code'] ?? '';
 $dept_code = $_POST['dept_code'] ?? '';
 $crs_title = $_POST['crs_title'] ?? '';    
 $crs_description= $_POST['crs_description'] ?? '';
-$crs_credit = $_POST['crs_credit'] ?? '';
+$crs_credit = $_POST['crs_credit'] ?? ''; 
 
 
 try {
