@@ -25,7 +25,7 @@ try {
 <body>
     <div class="container py-5">
         <h1 class="text-center fw-bold text-uppercase">Edit Semester</h1>
-        <form action="update.php" method="POST" class="form col-6 mx-auto mt-4">
+        <form action="update.php" method="POST" class="form col-6 mx-auto mt-4" enctype="multipart/form-data">
             <input type="hidden" name="semester_code" id="semester_code" class="form-control mb-3" value="<?= $semester['SEMESTER_CODE']?>">
 
             <label for="semester_year" class="form-label fw-medium">Semester Year</label>
@@ -54,6 +54,8 @@ try {
             <?php $endDate = DateTime::createFromFormat('d-M-y', $semester['SEMESTER_END_DATE'])->format('Y-m-d') ?>
             <label for="semester_end_date" class="form-label fw-medium">End Date</label>
             <input type="date" name="semester_end_date" id="semester_end_date" class="form-control mb-3" value="<?= $endDate ?>">
+
+             <input type="file" name="file" id="file" class="form-control mb-3">
 
             <div class="hstack justify-content-between my-4">
                 <a href="index.php" class="btn btn-outline-dark px-4 fw-semibold">Back</a>

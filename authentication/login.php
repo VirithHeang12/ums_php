@@ -17,6 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ]);
     $user = $stmt->fetch();
     if ($user) {
+        session_start();
+
+        $_SESSION['user'] = [
+            'id'        => $user['USER_ID'],
+            'username'  => $user['USERNAME'],
+            'role'      => $user['ROLE_ID']
+        ];
+
         header('Location: ../index.php');
         die();
     } else {

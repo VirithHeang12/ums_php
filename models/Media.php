@@ -4,7 +4,7 @@ class Media
 {
     private PDO $pdo;
 
-    public function save($file, PDO $pdo, string $mediaType, int $id, string $entityType): void {
+    public function save($file, PDO $pdo, string $mediaType, int $entityId, string $entityType): void {
         $this->pdo = $pdo;
 
         $fileName = null;
@@ -24,7 +24,7 @@ class Media
 
             $statement->bindParam(':media_type', $mediaType, PDO::PARAM_STR);
             $statement->bindParam(':media_url', $fileNameToStore, PDO::PARAM_STR);
-            $statement->bindParam(':entity_id', $id, PDO::PARAM_INT);
+            $statement->bindParam(':entity_id', $entityId, PDO::PARAM_INT);
             $statement->bindParam(':entity_type', $entityType, PDO::PARAM_STR);
 
             $statement->execute();         

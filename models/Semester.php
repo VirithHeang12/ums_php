@@ -17,17 +17,18 @@ class Semester implements CRUDable
     private string $semester_start_date;
     private string $semester_end_date;
 
-    public function __construct(PDO $pdo, int $semester_year, int $semester_term, string $semester_start_date, string $semester_end_date, $file)
+    public function __construct(PDO $pdo, int $semester_code, int $semester_year, int $semester_term, string $semester_start_date, string $semester_end_date, $file)
     {
         $this->pdo = $pdo;
         $this->media = new Media();
         $this->file = $file;
+        $this->semester_code = $semester_code;
         $this->semester_year = $semester_year;
         $this->semester_term = $semester_term;
         $this->semester_start_date = $semester_start_date;
         $this->semester_end_date = $semester_end_date;
-
     }
+
 
     // generate getter and setter
     public function getSemesterCode(): int
@@ -116,6 +117,7 @@ class Semester implements CRUDable
 
     public function update():void {
        try {
+            $this->pdo->beginTransaction();
             $statement = $this->pdo->prepare("UPDATE semesters
                 SET semester_year = :semester_year,
                     semester_term = :semester_term,
@@ -130,8 +132,13 @@ class Semester implements CRUDable
             $statement->bindParam(':semester_end_date', $this->semester_end_date, PDO::PARAM_STR);
 
             $statement->execute();
+
+            $this->media->save($this->file, $this->pdo, "attachment", (int) $this->semester_code, "semester");
+
+            $this->pdo->commit();
             header('Location: index.php');
         }catch(PDOException $e){
+            $this->pdo->rollBack();
             echo "Error: " . $e->getMessage();
         }
     }

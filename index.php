@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header('Location: authentication/login.php');
+    die();
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,14 +27,18 @@
             <h1>នាគខៀវ</h1>
             <nav>
                 <ul>
-                    <li><a href="professors">គ្រូ</a></li>
-                    <li><a href="students">និស្សិត</a></li>
-                    <li><a href="rooms">បន្ទប់</a></li>
-                    <li><a href="courses">វគ្គសិក្សា</a></li>
-                    <li><a href="schools">សាលា</a></li>
-                    <li><a href="classes">ថ្នាក់រៀន</a></li>
-                    <li><a href="semesters">ឆមាស</a></li>
-                    <li><a href="departments">Department</a></li>
+                    <?php if ((int) $_SESSION['user']['role'] === 1): ?>
+                        <li><a href="professors">គ្រូ</a></li>
+                        <li><a href="students">និស្សិត</a></li>
+                        <li><a href="rooms">បន្ទប់</a></li>
+                        <li><a href="courses">វគ្គសិក្សា</a></li>
+                        <li><a href="schools">សាលា</a></li>
+                        <li><a href="classes">ថ្នាក់រៀន</a></li>
+                        <li><a href="semesters">ឆមាស</a></li>
+                        <li><a href="departments">Department</a></li>
+                        
+                    <?php endif; ?>   
+                    <li><a href="authentication/logout.php">ចេញ</a></li>           
                     <li><a href="authentication/register.php">ចុះឈ្មោះ</a></li>
                     <li><a href="authentication/login.php">ចូល</a></li>
                 </ul>

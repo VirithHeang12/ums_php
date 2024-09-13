@@ -69,7 +69,7 @@ try {
                         <td>
                             <?php if ($attachment) : ?>
                                 <?php if ($attachment['MEDIA_TYPE'] === 'image') : ?>
-                                    <img src="./../images/<?php echo $attachment['MEDIA_URL']; ?>" alt="Attachment" class="img-fluid">
+                                    <img src="./../images/<?php echo $attachment['MEDIA_URL']; ?>" alt="Image" class="img-fluid">
                                 <?php elseif ($attachment['MEDIA_TYPE'] === 'attachment') : ?>
                                     <a href="./../images/<?php echo $attachment['MEDIA_URL']; ?>" target="_blank">មើល</a>
                                 <?php endif; ?>
