@@ -38,18 +38,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="./../bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <title>Login</title>
 </head>
-<body>
+<body class="bg-body-tertiary">
     <?php if ($message): ?>
         <p><?php echo $message ?></p>
     <?php endif; ?>
-    <form action="login.php" method="POST">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" value="<?php echo $username ?>">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
-        <button type="submit">Login</button>
-    </form>
+    <div class="container vh-100 d-flex align-items-center justify-content-center">
+        <div class="card p-4" style="width: 60%">
+            <form action="login.php" method="POST" class="vstack gap-3">
+                <div>
+                    <label for="username" class="form-label">Username</label>
+                    <input class="form-control" type="text" name="username" id="username" value="<?php echo $username ?>">
+                </div>
+                <div>
+                    <label class="form-label" for="password">Password</label>
+                    <input class="form-control" type="password" name="password" id="password">
+                </div>
+                <button type="submit" class="btn btn-dark mt-3">Login</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
