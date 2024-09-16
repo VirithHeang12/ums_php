@@ -29,10 +29,10 @@ INSERT INTO departments (dept_name, school_code, prof_num) VALUES
 
 -- Insert into semesters
 INSERT INTO semesters (semester_year, semester_term, semester_start_date, semester_end_date) VALUES
-(2024, 1, TO_DATE('2024-01-10', 'YYYY-MM-DD'), TO_DATE('2024-05-30', 'YYYY-MM-DD'));
+(2024, 1, '2024-01-10', '2024-05-30');
 
 INSERT INTO semesters (semester_year, semester_term, semester_start_date, semester_end_date) VALUES
-(2024, 2, TO_DATE('2024-08-10', 'YYYY-MM-DD'), TO_DATE('2024-12-20', 'YYYY-MM-DD'));
+(2024, 2, '2024-08-10', '2024-12-20');
 
 -- Insert into courses
 INSERT INTO courses (dept_code, crs_title, crs_description, crs_credit) VALUES
@@ -77,10 +77,10 @@ INSERT INTO classes (class_section, class_time, crs_code, prof_num, room_code, s
 
 -- Insert into enrolls
 INSERT INTO enrolls (class_code, stu_num, enroll_date, enroll_grade) VALUES
-(1, 1, TO_DATE('2024-01-15', 'YYYY-MM-DD'), 'A');
+(1, 1, '2024-01-15', 'A');
 
 INSERT INTO enrolls (class_code, stu_num, enroll_date, enroll_grade) VALUES
-(2, 2, TO_DATE('2024-08-15', 'YYYY-MM-DD'), 'B');
+(2, 2, '2024-08-15', 'B');
 
 -- Insert into users
 INSERT INTO users (username, password, entity_type, entity_id, role_id) VALUES
