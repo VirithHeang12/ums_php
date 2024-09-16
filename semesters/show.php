@@ -16,8 +16,7 @@ try {
     $attachment->bindParam(':entity_id', $semester_code);
     $attachment->bindParam(':entity_type', $entity_type);
     $attachment->execute();
-    $attachment = $attachment->fetch();
-
+    $attachment = $attachment->fetchAll();
 
     $classes = $statement->fetchAll();
 } catch (PDOException $e) {

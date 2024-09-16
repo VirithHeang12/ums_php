@@ -20,6 +20,12 @@ class Media
         }
 
         try {
+            $statement = $this->pdo->prepare("DELETE FROM medias WHERE entity_id = :entity_id AND entity_type = :entity_type");
+            $statement->bindParam(':entity_id', $entityId, PDO::PARAM_INT);
+            $statement->bindParam(':entity_type', $entityType, PDO::PARAM_STR);
+
+            $statement->execute();
+
             $statement = $this->pdo->prepare("INSERT INTO medias (media_type, media_url, entity_id, entity_type) VALUES (:media_type, :media_url, :entity_id, :entity_type)");
 
             $statement->bindParam(':media_type', $mediaType, PDO::PARAM_STR);

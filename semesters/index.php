@@ -37,27 +37,27 @@ try {
             <tbody>
                 <?php foreach ($semesters as $row): ?>
                     <tr align="center" class="align-middle">
-                        <td><?php echo $row['SEMESTER_CODE']; ?></td>
-                        <td><?php echo $row['SEMESTER_YEAR']; ?></td>
-                        <td><?php echo $row['SEMESTER_TERM']; ?></td>
+                        <td><?php echo $row['semester_code']; ?></td>
+                        <td><?php echo $row['semester_year']; ?></td>
+                        <td><?php echo $row['semester_term']; ?></td>
                         <td class="px-5">
                             <?php
-                            $semesterStartDate = $row['SEMESTER_START_DATE'];
+                            $semesterStartDate = $row['semester_start_date'];
                             $formattedDate = date('F d, Y', strtotime($semesterStartDate));
                             echo $formattedDate;
                             ?>
                         </td>
                         <td class="px-5">
                             <?php 
-                            $semesterEndDate = $row['SEMESTER_END_DATE']; 
+                            $semesterEndDate = $row['semester_end_date']; 
                             echo date('F d, Y', strtotime($semesterEndDate));
                             ?>
                         </td>
                         <td>
                             <div class="d-flex justify-content-between">
-                                <a href="show.php?id=<?php echo $row['SEMESTER_CODE']; ?>" class="btn btn-success py-1 px-3" style="font-size: 15px;">Show</a>
-                                <a href="edit.php?id=<?php echo $row['SEMESTER_CODE']; ?>" class="btn btn-primary py-1 px-3" style="font-size: 15px;">Edit</a>
-                                <a href="delete.php?id=<?php echo $row['SEMESTER_CODE']; ?>" class="btn btn-danger py-1 px-3" style="font-size: 15px;">Delete</a>
+                                <a href="show.php?id=<?php echo $row['semester_code']; ?>" class="btn btn-success py-1 px-3" style="font-size: 15px;">Show</a>
+                                <a href="edit.php?id=<?php echo $row['semester_code']; ?>" class="btn btn-primary py-1 px-3" style="font-size: 15px;">Edit</a>
+                                <a href="delete.php?id=<?php echo $row['semester_code']; ?>" class="btn btn-danger py-1 px-3" style="font-size: 15px;">Delete</a>
                             </div>
                         </td>
                     </tr>
