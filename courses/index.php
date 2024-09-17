@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../database/database_connection.php';
+require_once __DIR__ . '/../models/Course.php'; 
 
 try {
     $statement = $pdo->prepare("
@@ -25,7 +26,7 @@ try {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
     <h1 class="text-center">Courses</h1>
     <a href="create.php" class="btn btn-primary">Create Course</a><br><br>
     <table class="table border table-hover">
@@ -42,15 +43,15 @@ try {
        
             <?php foreach ($courses as $row): ?>
                 <tr>
-                    <td><?php echo $row['CRS_CODE']; ?></td>
-                    <td><?php echo $row['DEPT_NAME']; ?></td>
-                    <td><?php echo $row['CRS_TITLE']; ?></td>
-                    <td><?php echo $row['CRS_DESCRIPTION']; ?></td>
-                    <td><?php echo $row['CRS_CREDIT']; ?></td>
+                    <td><?php echo $row['crs_code']; ?></td>
+                    <td><?php echo $row['dept_name']; ?></td>
+                    <td><?php echo $row['crs_title']; ?></td>
+                    <td><?php echo $row['crs_description']; ?></td>
+                    <td><?php echo $row['crs_credit']; ?></td>
                     <td>
-                        <a href="show.php?id=<?php echo $row['CRS_CODE']; ?>" class="btn btn-success">SHOW</a>
-                        <a href="edit.php?id=<?php echo $row['CRS_CODE']; ?>" class="btn btn-primary">EDIT</a>
-                        <a href="delete.php?id=<?php echo $row['CRS_CODE']; ?>" class="btn btn-danger">DELETE</a>
+                        <a href="show.php?id=<?php echo $row['crs_code']; ?>" class="btn btn-success">SHOW</a>
+                        <a href="edit.php?id=<?php echo $row['crs_code']; ?>" class="btn btn-primary">EDIT</a>
+                        <a href="delete.php?id=<?php echo $row['crs_code']; ?>" class="btn btn-danger">DELETE</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
