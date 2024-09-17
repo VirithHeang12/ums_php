@@ -1,27 +1,24 @@
-<?php 
+<?php
+
 
 require_once __DIR__ . '/../database/database_connection.php';
+require_once __DIR__ . '/../models/Course.php'; 
 
-$crs_code = $_GET['id'];
 
-try {
-    $statement = $pdo->prepare("SELECT c.*, d.dept_name 
-        FROM courses c 
-         JOIN departments d ON c.dept_code = d.dept_code WHERE CRS_CODE = :crs_code");
-    $statement->bindParam(':crs_code', $crs_code);
-    $statement->execute();
-    $course = $statement->fetch();
+$crs_code = $_GET['id'] ?? null; 
+$entity_type = 'course';
 
-    $statement = $pdo->prepare("SELECT * FROM classes WHERE CRS_CODE = :crs_code");
-    $statement->bindParam(':crs_code', $crs_code);
-    $statement->execute();
-    $classes = $statement->fetchAll();
-} catch (PDOException $e) {
-    echo "Error while retrieving course: " . $e->getMessage();
-}
+    $courseModel = new Course($pdo); 
+    $result = $courseModel->getCourse((int)$crs_code, $entity_type); 
 
-?>  
-    
+ 
+    $course = $result['course'] ?? []; 
+    $classes = $result['classes'] ?? [];
+    $attachment = $result['attachment'] ?? [];
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +31,7 @@ try {
 </head>
 
 <body>
-<a href="index.php" class="btn btn-primary m-5">Back</a>
+    <a href="index.php" class="btn btn-primary m-5">Back</a>
     <h1 class="text-center">Show Course</h1>
     <div class="container">
         <div class="row">
@@ -42,23 +39,35 @@ try {
                 <table class="table">
                     <tr>
                         <th>COURSE CODE</th>
-                        <td><?php echo $course['CRS_CODE'] ?></td>
+                        <td><?php echo $course['crs_code'] ?></td>
                     </tr>
                     <tr>
                         <th>DEPARTMENT NAME</th>
-                        <td><?php echo $course['DEPT_NAME']; ?></td>
+                        <td><?php echo $course['dept_name']; ?></td>
                     </tr>
                     <tr>
                         <th>COURSE TITLE</th>
-                        <td><?php echo $course['CRS_TITLE']; ?></td>
+                        <td><?php echo $course['crs_title']; ?></td>
                     </tr>
                     <tr>
                         <th>COURSE DESCRIPTION</th>
-                        <td><?php echo $course['CRS_DESCRIPTION'];  ?></td>
+                        <td><?php echo $course['crs_description'];  ?></td>
                     </tr>
                     <tr>
                         <th>COURSE CREDIT</th>
-                        <td><?php echo $course['CRS_CREDIT'];  ?></td>
+                        <td><?php echo $course['crs_credit'];  ?></td>
+                    </tr>
+                    <tr>
+                        <th class="col-5">ATTACHMENT</th>
+
+                        <td>
+                            <?php if ($attachment['media_type'] === 'attachment') : ?>
+                                <a href="./../images/<?php echo $attachment['media_url']; ?>" target="_blank" style="font-family: Kantumruy Pro;">មើល</a>
+                            <?php else : ?>
+                                No Attachment
+                            <?php endif; ?>
+                        </td>
+                       
                     </tr>
                 </table>
                 <h2 class="text-center">Classes</h2>
@@ -70,12 +79,12 @@ try {
                     </tr>
                     <?php foreach ($classes as $class) : ?>
                         <tr>
-                            <td><?php echo $class['CLASS_CODE']; ?></td>
-                            <td><?php echo $class['CLASS_SECTION']; ?></td>
-                            <td><?php echo $class['CLASS_TIME']; ?></td>
+                            <td><?php echo $class['class_code']; ?></td>
+                            <td><?php echo $class['class_section']; ?></td>
+                            <td><?php echo $class['class_time']; ?></td>
                         </tr>
                     <?php endforeach; ?>
-                  
+
             </div>
         </div>
     </div>
