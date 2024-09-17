@@ -35,12 +35,9 @@ if (!isset($_SESSION['user'])) {
                         <li><a href="schools">សាលា</a></li>
                         <li><a href="classes">ថ្នាក់រៀន</a></li>
                         <li><a href="semesters">ឆមាស</a></li>
-                        <li><a href="departments">Department</a></li>
-                        
+                        <li><a href="departments">Department</a></li>                
                     <?php endif; ?>   
                     <li><a href="authentication/logout.php">ចេញ</a></li>           
-                    <li><a href="authentication/register.php">ចុះឈ្មោះ</a></li>
-                    <li><a href="authentication/login.php">ចូល</a></li>
                 </ul>
             </nav>
         </div>

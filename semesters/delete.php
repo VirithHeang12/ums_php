@@ -30,23 +30,23 @@ try {
                 <table class="table">
                     <tr>
                         <th class="col-5">SEMESTER CODE</th>
-                        <td><?php echo $semester['SEMESTER_CODE']; ?></td>
+                        <td><?php echo $semester['semester_code']; ?></td>
                     </tr>
                     <tr>
                         <th class="col-5">SEMESTER YEAR</th>
-                        <td><?php echo $semester['SEMESTER_YEAR']; ?></td>
+                        <td><?php echo $semester['semester_year']; ?></td>
                     </tr>
                     <tr>
                         <th class="col-5">SEMESTER TERM</th>
-                        <td><?php echo $semester['SEMESTER_TERM']; ?></td>
+                        <td><?php echo $semester['semester_term']; ?></td>
                     </tr>
                     <tr>
                         <th class="col-5">START DATE</th>
-                        <td><?php echo date('F d, Y', strtotime($semester['SEMESTER_START_DATE'])); ?></td>
+                        <td><?php echo date('F d, Y', strtotime($semester['semester_start_date'])); ?></td>
                     </tr>
                     <tr>
                         <th class="col-5">END DATE</th>
-                        <td><?php echo date('F d, Y', strtotime($semester['SEMESTER_END_DATE'])); ?></td>
+                        <td><?php echo date('F d, Y', strtotime($semester['semester_end_date'])); ?></td>
                     </tr>
                 </table>
                 <div class="hstack justify-content-between my-4">

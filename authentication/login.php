@@ -20,9 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         session_start();
 
         $_SESSION['user'] = [
-            'id'        => $user['USER_ID'],
-            'username'  => $user['USERNAME'],
-            'role'      => $user['ROLE_ID']
+            'id'        => $user['user_id'],
+            'username'  => $user['username'],
+            'role'      => $user['role_id']
         ];
 
         header('Location: ../index.php');

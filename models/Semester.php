@@ -88,7 +88,7 @@ class Semester implements CRUDable
             $this->pdo->beginTransaction();
              
             $statement = $this->pdo->prepare("INSERT INTO semesters (semester_year, semester_term, semester_start_date, semester_end_date) 
-            VALUES (:semester_year, :semester_term, (TO_DATE(:semester_start_date, 'YYYY-MM-DD')), (TO_DATE(:semester_end_date, 'YYYY-MM-DD')))");
+            VALUES (:semester_year, :semester_term, :semester_start_date, :semester_end_date)");
 
             $statement->bindParam(':semester_year', $this->semester_year, PDO::PARAM_INT);
             $statement->bindParam(':semester_term', $this->semester_term, PDO::PARAM_INT);
@@ -98,11 +98,11 @@ class Semester implements CRUDable
             $statement->execute();
 
             $statement = $this->pdo->prepare(
-                "SELECT semester_code FROM semesters ORDER BY semester_code DESC OFFSET 0 ROW FETCH NEXT 1 ROW ONLY");
+                "SELECT semester_code FROM semesters ORDER BY semester_code DESC LIMIT 1 OFFSET 0");
 
             $statement->execute();
 
-            $this->semester_code = (int) $statement->fetch()['SEMESTER_CODE'];
+            $this->semester_code = (int) $statement->fetch()['semester_code'];
 
             $this->media->save($this->file, $this->pdo, "attachment", $this->semester_code, "semester");
 
@@ -121,8 +121,8 @@ class Semester implements CRUDable
             $statement = $this->pdo->prepare("UPDATE semesters
                 SET semester_year = :semester_year,
                     semester_term = :semester_term,
-                    semester_start_date = TO_DATE(:semester_start_date, 'YYYY-MM-DD'),
-                    semester_end_date = TO_DATE(:semester_end_date, 'YYYY-MM-DD')
+                    semester_start_date = :semester_start_date,
+                    semester_end_date = :semester_end_date
                 WHERE semester_code = :semester_code");
 
             $statement->bindParam(':semester_code', $this->semester_code, PDO::PARAM_INT);
