@@ -6,6 +6,9 @@ $isLoggedIn = false;
 
 if (isset($_SESSION['user'])) {
     $isLoggedIn = true;
+} else {
+    header('Location: ../authentication/login.php');
+    die();
 }
 
 ?>
@@ -19,7 +22,8 @@ if (isset($_SESSION['user'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>University Welcome Page</title>
-    <link rel="stylesheet" href="public/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/ums_php/public/styles.css">
 </head>
 
 <body>
@@ -30,8 +34,8 @@ if (isset($_SESSION['user'])) {
                 <ul>
                     <?php if (!$isLoggedIn) : ?>
                         <li><a href="./">ទំព័រ</a></li>
-                        <li><a href="authentication/login">ចូល</a></li>
-                        <li><a href="authentication/register">ចុះឈ្មោះ</a></li>
+                        <li><a href="login">ចូល</a></li>
+                        <li><a href="register">ចុះឈ្មោះ</a></li>
                     <?php else : ?>
                         <?php if ($_SESSION['user']['role'] == 1) : ?>
                             <li><a href="professors">គ្រូ</a></li>
@@ -62,9 +66,8 @@ if (isset($_SESSION['user'])) {
     <div class="main-content">
         <section class="welcome">
             <div class="container">
-                <h2>Welcome to Our University</h2>
-                <p>We are thrilled to have you join our academic community. At our university, we strive to provide an enriching experience with world-class education and vibrant campus life.</p>
-                <a href="#" class="cta-button">Learn More</a>
+                <h2>You are not allowed to view this page!</h2>
+                <a href="../index.php" class="btn btn-success">Go back to the home page</a>
             </div>
         </section>
     </div>
@@ -74,5 +77,6 @@ if (isset($_SESSION['user'])) {
             <p>&copy; 2024 University Name. All rights reserved.</p>
         </div>
     </footer>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

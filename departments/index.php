@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__ . '/../database/database_connection.php';
+require_once __DIR__ . '/../authentication/student_authorization_check.php';
 
 try {
-
     $statement = $pdo->prepare("SELECT d.* , d.dept_name,s.school_code,p.prof_num
     from departments d
     JOIN schools s ON d.school_code = s.school_code

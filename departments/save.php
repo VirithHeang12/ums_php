@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/../authentication/student_authorization_check.php';
+
+
+
 require_once __DIR__ . '/../database/database_connection.php';
 require_once __DIR__ . '/../models/Department.php';
 

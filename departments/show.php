@@ -1,6 +1,7 @@
 <?php 
 require_once __DIR__ . '/../database/database_connection.php';
 require_once __DIR__ . '/../models/Department.php';
+require_once __DIR__ . '/../authentication/student_authorization_check.php';
 
 $dept_code = $_GET['id'];
 $entity_type = 'department';
