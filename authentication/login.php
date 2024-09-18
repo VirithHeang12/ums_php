@@ -20,11 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         session_start();
 
         $_SESSION['user'] = [
-            'id'        => $user['USER_ID'],
-            'username'  => $user['USERNAME'],
-            'role'      => $user['ROLE_ID']
+            'id'        => $user['user_id'],
+            'username'  => $user['username'],
+            'role'      => $user['role_id']
         ];
-
         header('Location: ../index.php');
         die();
     } else {
@@ -46,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p><?php echo $message ?></p>
     <?php endif; ?>
     <div class="container vh-100 d-flex align-items-center justify-content-center">
-        <div class="card p-4" style="width: 60%">
+        <div class="card p-4" style="width: 35%">
             <form action="login.php" method="POST" class="vstack gap-3">
                 <div>
                     <label for="username" class="form-label">Username</label>

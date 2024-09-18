@@ -35,22 +35,22 @@ $attachment = $result['attachment'] ?? [];
                 <table class="table">
                     <tr>
                         <th class="col-5">SCHOOL CODE</th>
-                        <td><?php echo $school['SCHOOL_CODE']; ?></td>
+                        <td><?php echo $school['school_code']; ?></td>
                     </tr>
                     <tr>
                         <th class="col-5">SCHOOL NAME</th>
-                        <td><?php echo $school['SCHOOL_NAME']; ?></td>
+                        <td><?php echo $school['school_name']; ?></td>
                     </tr>
                     <tr>
                         <th class="col-5">DEAN</th>
-                        <td><?php echo $professor['FULL_NAME']; ?></td>
+                        <td><?php echo $professor['full_name']; ?></td>
                     </tr>
                     <?php if ($attachment) : ?>
                         <tr>
                             <th class="col-5">LOGO</th>
                             <td>
-                                <?php if ($attachment['MEDIA_TYPE'] === 'image') : ?>
-                                    <img src="./../images/<?php echo htmlspecialchars($attachment['MEDIA_URL']); ?>" alt="Logo" style="width: 100px; height: 100px; border-radius: 50%; margin-right: 5px;" class="object-fit-cover">
+                                <?php if ($attachment['media_type'] === 'image') : ?>
+                                    <img src="./../images/<?php echo htmlspecialchars($attachment['media_url']); ?>" alt="Logo" style="width: 100px; height: 100px; border-radius: 50%; margin-right: 5px;" class="object-fit-cover">
                                 <?php else : ?>
                                     No Logo
                                 <?php endif; ?>

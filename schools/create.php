@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../database/database_connection.php';
 
 try {
-    $statement = $pdo->prepare("SELECT prof_num, prof_fname || ' ' || prof_lname AS full_name FROM professors");
+    $statement = $pdo->prepare("SELECT prof_num, CONCAT(prof_fname, ' ', prof_lname) AS full_name FROM professors");
     $statement->execute();
     $professors = $statement->fetchAll();
 } catch (PDOException $e) {
@@ -33,7 +33,7 @@ try {
             <select name="prof_num" id="prof_num" class="form-select">
                 <option>Select professor here</option>
                 <?php foreach ($professors as $row): ?>
-                        <option value="<?= $row['PROF_NUM'] ?>"><?= $row['FULL_NAME'] ?></option>
+                        <option value="<?= $row['prof_num'] ?>"><?= $row['full_name'] ?></option>
                 <?php endforeach; ?>
             </select>
 

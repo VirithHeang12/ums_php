@@ -34,11 +34,11 @@ $schools = $schools->read();
             <tbody>
                 <?php foreach ($schools as $row): ?>
                     <tr align="center" class="align-middle">
-                        <td><?php echo $row['SCHOOL_CODE'] ?></td>
+                        <td><?php echo $row['school_code'] ?></td>
                         <td align="left">
                             <!-- logo -->
                             <?php
-                            $school_code = $row['SCHOOL_CODE'];
+                            $school_code = $row['school_code'];
                             $entity_type = 'school';
                             $attachmentQuery = $pdo->prepare("SELECT * FROM medias WHERE entity_id = :entity_id AND entity_type = :entity_type");
                             $attachmentQuery->bindParam(':entity_id', $school_code);
@@ -48,7 +48,7 @@ $schools = $schools->read();
 
                             if (!empty($attachments)):
                                 foreach ($attachments as $attachment):
-                                    echo '<img src="./../images/' . htmlspecialchars($attachment['MEDIA_URL']) . '" alt="Logo" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 5px;" class="object-fit-cover"/>';
+                                    echo '<img src="./../images/' . htmlspecialchars($attachment['media_url']) . '" alt="Logo" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 5px;" class="object-fit-cover"/>';
                                 endforeach;
                             else:
                                 echo '';
@@ -56,24 +56,24 @@ $schools = $schools->read();
                             ?>
 
                             <!-- school name -->
-                            <?php echo $row['SCHOOL_NAME']; ?>
+                            <?php echo $row['school_name']; ?>
                         </td>
                         <td>
-                            
-                            <?php
-                                $statement = $pdo->prepare("SELECT prof_fname || ' ' || prof_lname AS full_name FROM professors WHERE prof_num = :prof_num");
-                                $statement->bindParam(':prof_num', $row['PROF_NUM']);
-                                $statement->execute();
-                                $professor = $statement->fetch();
 
-                                echo $professor['FULL_NAME'];
+                            <?php
+                            $statement = $pdo->prepare("SELECT CONCAT(prof_fname, ' ', prof_lname) AS full_name FROM professors WHERE prof_num = :prof_num;");
+                            $statement->bindParam(':prof_num', $row['prof_num']);
+                            $statement->execute();
+                            $professor = $statement->fetch();
+
+                            echo $professor['full_name'];
                             ?>
                         </td>
                         <td style="max-width: 150px;">
                             <div class="d-flex justify-content-around">
-                                <a href="show.php?id=<?php echo $row['SCHOOL_CODE']; ?>" class="btn btn-success py-1 px-3" style="font-size: 15px;">Show</a>
-                                <a href="edit.php?id=<?php echo $row['SCHOOL_CODE']; ?>" class="btn btn-primary py-1 px-3" style="font-size: 15px;">Edit</a>
-                                <a href="delete.php?id=<?php echo $row['SCHOOL_CODE']; ?>" class="btn btn-danger py-1 px-3" style="font-size: 15px;">Delete</a>
+                                <a href="show.php?id=<?php echo $row['school_code']; ?>" class="btn btn-success py-1 px-3" style="font-size: 15px;">Show</a>
+                                <a href="edit.php?id=<?php echo $row['school_code']; ?>" class="btn btn-primary py-1 px-3" style="font-size: 15px;">Edit</a>
+                                <a href="delete.php?id=<?php echo $row['school_code']; ?>" class="btn btn-danger py-1 px-3" style="font-size: 15px;">Delete</a>
                             </div>
                         </td>
                     </tr>

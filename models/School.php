@@ -63,9 +63,9 @@ class School implements CRUDable
             $statement->bindParam(':prof_num', $this->prof_num, PDO::PARAM_INT);
             $statement->execute();
 
-            $statement = $this->pdo->prepare("SELECT school_code FROM schools ORDER BY school_code DESC OFFSET 0 ROW FETCH NEXT 1 ROW ONLY");
+            $statement = $this->pdo->prepare("SELECT school_code FROM schools ORDER BY school_code DESC LIMIT 1 OFFSET 0;");
             $statement->execute();
-            $this->school_code = (int) $statement->fetch()['SCHOOL_CODE'];
+            $this->school_code = (int) $statement->fetch()['school_code'];
 
             $this->media->save($this->file, $this->pdo, "image", $this->school_code, "school");
 
@@ -99,8 +99,8 @@ class School implements CRUDable
 
             $professor = [];
             if ($school) {
-                $statement = $this->pdo->prepare("SELECT prof_fname || ' ' || prof_lname AS full_name FROM professors WHERE prof_num = :prof_num");
-                $statement->bindParam(':prof_num', $school['PROF_NUM']);
+                $statement = $this->pdo->prepare("SELECT CONCAT(prof_fname, ' ', prof_lname)  AS full_name FROM professors WHERE prof_num = :prof_num");
+                $statement->bindParam(':prof_num', $school['prof_num']);
                 $statement->execute();
                 $professor = $statement->fetch(PDO::FETCH_ASSOC);
             }
