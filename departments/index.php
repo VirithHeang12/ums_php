@@ -39,14 +39,14 @@ try {
         </tr>
         <?php foreach ($departments as $row) : ?>
             <tr>
-                <td><?php echo $row['DEPT_CODE'] ?></td>
-                <td><?php echo $row['DEPT_NAME']; ?></td>
-                <td><?php echo $row['SCHOOL_CODE']; ?></td>
-                <td><?php echo $row['PROF_NUM']; ?></td>
+                <td><?php echo $row['dept_code'] ?></td>
+                <td><?php echo $row['dept_name']; ?></td>
+                <td><?php echo $row['school_code']; ?></td>
+                <td><?php echo $row['prof_num']; ?></td>
                 <td>
-                    <a href="show.php?id=<?php echo $row['DEPT_CODE']; ?>" class="btn btn-success">SHOW</a>
-                    <a href="edit.php?id=<?php echo $row['DEPT_CODE']; ?>" class="btn btn-primary">EDIT</a>
-                    <a href="delete.php?id=<?php echo $row['DEPT_CODE']; ?>" class="btn btn-danger">DELETE</a>
+                    <a href="show.php?id=<?php echo $row['dept_code']; ?>" class="btn btn-success">SHOW</a>
+                    <a href="edit.php?id=<?php echo $row['dept_code']; ?>" class="btn btn-primary">EDIT</a>
+                    <a href="delete.php?id=<?php echo $row['dept_code']; ?>" class="btn btn-danger">DELETE</a>
                 </td>
             </tr>
         <?php endforeach; ?>

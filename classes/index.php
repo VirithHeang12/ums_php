@@ -3,11 +3,11 @@ require_once __DIR__ . '/../database/database_connection.php';
 
 try {
     $statement = $pdo->prepare(
-        "select c.*, crs.CRS_TITLE, (p.PROF_LNAME || ' ' || p.PROF_FNAME) PROF_NAME from CLASSES c 
+        "select c.*, crs.crs_code, crs.crs_title, CONCAT(p.PROF_LNAME, ' ', p.PROF_FNAME) AS prof_name from CLASSES c 
             join COURSES crs ON c.CRS_CODE = crs.CRS_CODE 
             join PROFESSORS p ON c.PROF_NUM = p.PROF_NUM 
-            join ROOMS r ON c.ROOM_CODE = r.ROOM_CODE 
-            join SEMESTERS s ON c.SEMESTER_CODE = s.SEMESTER_CODE"
+            join ROOMS r ON c.room_code = r.room_code 
+            join SEMESTERS s ON c.semester_code = s.semester_code"
     );
     $statement->execute();
     $classes = $statement->fetchAll();
@@ -49,31 +49,31 @@ try {
             </thead>
             <?php foreach ($classes as $row) : ?>
                 <tr>
-                    <td><?php echo $row['CLASS_CODE'] ?></td>
-                    <td><?php echo $row['CLASS_SECTION']; ?></td>
-                    <td><?php echo $row['CLASS_TIME']; ?></td>
-                    <td><?php echo $row['CRS_TITLE'] ?></td>
-                    <td><?php echo $row['PROF_NAME']; ?></td>
-                    <td><?php echo $row['ROOM_CODE']; ?></td>
-                    <td><?php echo $row['SEMESTER_CODE']; ?></td>
+                    <td><?php echo $row['class_code'] ?></td>
+                    <td><?php echo $row['class_section']; ?></td>
+                    <td><?php echo $row['class_time']; ?></td>
+                    <td><?php echo $row['crs_title'] ?></td>
+                    <td><?php echo $row['prof_name']; ?></td>
+                    <td><?php echo $row['room_code']; ?></td>
+                    <td><?php echo $row['semester_code']; ?></td>
                     <td>
-                        <a href="show.php?id=<?php echo $row['CLASS_CODE']; ?>" class="btn btn-info">SHOW</a>
-                        <a href="edit.php?id=<?php echo $row['CLASS_CODE']; ?>" class="btn btn-warning">EDIT</a>
-                        <a data-bs-toggle="modal" data-bs-target="#classModal<?php echo $row['CLASS_CODE']; ?>" role="button" class="btn btn-danger">DELETE</a>
+                        <a href="show.php?id=<?php echo $row['class_code']; ?>" class="btn btn-info">SHOW</a>
+                        <a href="edit.php?id=<?php echo $row['class_code']; ?>" class="btn btn-warning">EDIT</a>
+                        <a data-bs-toggle="modal" data-bs-target="#classModal<?php echo $row['class_code']; ?>" role="button" class="btn btn-danger">DELETE</a>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="classModal<?php echo $row['CLASS_CODE']; ?>" tabindex="-1" aria-labelledby="classModalLabel<?php echo $row['CLASS_CODE']; ?>" aria-hidden="true">
+                        <div class="modal fade" id="classModal<?php echo $row['class_code']; ?>" tabindex="-1" aria-labelledby="classModalLabel<?php echo $row['class_code']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="classModalLabel<?php echo $row['CLASS_CODE']; ?>">Delete Class</h1>
+                                        <h1 class="modal-title fs-5" id="classModalLabel<?php echo $row['class_code']; ?>">Delete Class</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         Do you want to delete this class information?
                                     </div>
                                     <div class="modal-footer">
-                                        <a href="delete.php?id=<?php echo $row['CLASS_CODE']; ?>" class="btn btn-success ms-5">Confirm</a>
+                                        <a href="delete.php?id=<?php echo $row['class_code']; ?>" class="btn btn-success ms-5">Confirm</a>
                                         <button type="button" data-bs-dismiss="modal" class="btn btn-danger ms-5">Cancel</button>
                                     </div>
                                 </div>
