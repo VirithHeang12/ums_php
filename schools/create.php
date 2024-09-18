@@ -26,6 +26,9 @@ try {
     <div class="container py-5">
         <h1 class="text-center fw-bold text-uppercase">Create School</h1>
         <form action="save.php" method="POST" class="form col-6 mx-auto mt-4" enctype="multipart/form-data">
+            <label class="form-label fw-medium mt-3">School Logo</label>
+            <input type="file" name="file" id="file" class="form-control mb-3">
+
             <label for="school_name" class="form-label fw-medium">School Name</label>
             <input type="text" name="school_name" id="school_name" class="form-control mb-3" placeholder="Enter school name here">
 
@@ -36,9 +39,6 @@ try {
                         <option value="<?= $row['prof_num'] ?>"><?= $row['full_name'] ?></option>
                 <?php endforeach; ?>
             </select>
-
-            <label class="form-label fw-medium mt-3">School Logo</label>
-            <input type="file" name="file" id="file" class="form-control mb-3">
             
             <div class="hstack justify-content-between my-4">
                 <a href="index.php" class="btn btn-outline-dark px-4 fw-semibold">Back</a>

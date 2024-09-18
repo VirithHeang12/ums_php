@@ -10,5 +10,4 @@
     $prof_num = (int)($_POST['prof_num'] ?? 0);
 
     $school = new School($pdo, $school_code, $school_name, $prof_num, $_FILES);
-
-?>
+    $school->update();
