@@ -30,8 +30,8 @@ if (isset($_SESSION['user'])) {
                 <ul>
                     <?php if (!$isLoggedIn) : ?>
                         <li><a href="./">ទំព័រ</a></li>
-                        <li><a href="authentication/login">ចូល</a></li>
-                        <li><a href="authentication/register">ចុះឈ្មោះ</a></li>
+                        <li><a href="authentication/login.php">ចូល</a></li>
+                        <li><a href="authentication/register.php">ចុះឈ្មោះ</a></li>
                     <?php else : ?>
                         <?php if ($_SESSION['user']['role'] == 1) : ?>
                             <li><a href="professors">គ្រូ</a></li>
@@ -52,7 +52,7 @@ if (isset($_SESSION['user'])) {
                             <li><a href="courses">វគ្គសិក្សា</a></li>
                             <li><a href="classes">ថ្នាក់រៀន</a></li>
                         <?php endif; ?>
-                        <li><a href="authentication/logout">ចេញ</a></li>
+                        <li><a href="authentication/logout.php">ចេញ</a></li>
                     <?php endif; ?>              
                 </ul>
             </nav>
