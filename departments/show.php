@@ -1,7 +1,10 @@
 <?php 
 require_once __DIR__ . '/../database/database_connection.php';
+require_once __DIR__ . '/../models/Department.php';
+require_once __DIR__ . '/../authentication/student_authorization_check.php';
 
 $dept_code = $_GET['id'];
+$entity_type = 'department';
 
 try {
     $statement = $pdo->prepare("SELECT d.* , d.dept_name,s.school_code,p.prof_num
@@ -12,6 +15,13 @@ try {
     $statement->bindParam(':dept_code', $dept_code);
     $statement->execute();
     $department = $statement->fetch();
+
+
+    $attachment = $pdo->prepare("SELECT * FROM medias WHERE entity_id = :entity_id AND entity_type = :entity_type");
+    $attachment->bindParam(':entity_id', $dept_code);
+    $attachment->bindParam(':entity_type', $entity_type);
+    $attachment->execute();
+    $attachments = $attachment->fetchAll();
 
 } catch (PDOException $e) {
     echo "Error while retrieving professor: " . $e->getMessage();
@@ -36,19 +46,37 @@ try {
                 <table class="table">
                     <tr>
                         <th>DEPARTMENT CODE</th>
-                        <td><?php echo $department['DEPT_CODE']; ?></td>
+                        <td><?php echo $department['dept_code']; ?></td>
                     </tr>
                     <tr>
                         <th>DEPARTMENT NAME</th>
-                        <td><?php echo $department['DEPT_NAME']; ?></td>
+                        <td><?php echo $department['dept_name']; ?></td>
                     </tr>
                     <tr>
                         <th>SCHOOL CODE</th>
-                        <td><?php echo $department['SCHOOL_CODE']; ?></td>
+                        <td><?php echo $department['school_code']; ?></td>
                     </tr>
                     <tr>
                         <th>PROFESSOR NUMBER</th>
-                        <td><?php echo $department['PROF_NUM']; ?></td>
+                        <td><?php echo $department['prof_num']; ?></td>
+                    </tr>
+                    <tr>
+                        <th class="col-5">ATTACHMENT</th>
+                        <td>
+                            <?php if ($attachments) : ?>
+                                <?php foreach ($attachments as $attachment) : ?>
+                                <?php if ($attachment['media_type'] === 'image') : ?>
+                                    <img src="./../images/<?php echo $attachment['media_url']; ?>" alt="Image" class="img-fluid">
+                                <?php elseif ($attachment['media_type'] === 'attachment') : ?>
+                                    <a href="./../images/<?php echo $attachment['media_url']; ?>" target="_blank">មើល</a>
+                                <?php endif; ?>
+                                <?php endforeach; ?>
+
+                            <?php else : ?>
+                                No attachment
+                            <?php endif; ?>
+                            
+                        </td>
                     </tr>
                    
                 </table>

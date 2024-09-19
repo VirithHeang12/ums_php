@@ -47,7 +47,7 @@ try {
         <div class="row">
             <div class="col-6 m-auto">
                 <h1 class="text-center">Create Class</h1>
-                <form class="form" action="save.php" method="post">
+                <form class="form" action="save.php" method="POST" enctype="multipart/form-data">
                     <div class="row mb-3">
                         <label for="class_section" class="col-3">Class Section</label>
                         <div class="col-9">
@@ -65,7 +65,7 @@ try {
                         <div class="col-9">
                             <select class="form-select" name="crs_code" id="crs_code">
                                 <?php foreach ($courses as $row) : ?>
-                                    <option value="<?php echo $row['CRS_CODE'] ?>"><?php echo $row['CRS_TITLE'] ?></option>
+                                    <option value="<?php echo $row['crs_code'] ?>"><?php echo $row['crs_title'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -75,7 +75,7 @@ try {
                         <div class="col-9">
                             <select class="form-select" name="prof_num" id="prof_num">
                                 <?php foreach ($professors as $row) : ?>
-                                    <option value="<?php echo $row['PROF_NUM'] ?>"><?php echo $row['PROF_LNAME'] . " " . $row['PROF_FNAME'] ?></option>
+                                    <option value="<?php echo $row['prof_num'] ?>"><?php echo $row['prof_lname'] . " " . $row['prof_fname'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -85,7 +85,7 @@ try {
                         <div class="col-9">
                             <select class="form-select" name="room_code" id="room_code">
                                 <?php foreach ($rooms as $row) : ?>
-                                    <option value="<?php echo $row['ROOM_CODE'] ?>"><?php echo $row['ROOM_CODE'] ?></option>
+                                    <option value="<?php echo $row['room_code'] ?>"><?php echo $row['room_code'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -95,9 +95,15 @@ try {
                         <div class="col-9">
                             <select class="form-select" name="semester_code" id="semester_code">
                                 <?php foreach ($semesters as $row) : ?>
-                                    <option value="<?php echo $row['SEMESTER_CODE'] ?>"><?php echo $row['SEMESTER_CODE'] ?></option>
+                                    <option value="<?php echo $row['semester_code'] ?>"><?php echo $row['semester_code'] ?></option>
                                 <?php endforeach; ?>
                             </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="file" class="col-3">Attachment</label>
+                        <div class="col-9">
+                            <input type="file" name="file" id="file" class="form-control">
                         </div>
                     </div>
                     <div class="mt-4">

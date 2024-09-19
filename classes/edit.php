@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../database/database_connection.php';
 
 $class_code = $_GET['id'] ?? '';
-
+$entity_type = 'class';
 try {
     $statement = $pdo->prepare("SELECT * FROM courses");
     $statement->execute();
@@ -27,13 +27,19 @@ try {
     $statement->execute();
 
     $class = $statement->fetch(PDO::FETCH_ASSOC);
-    $class_code = $class['CLASS_CODE'];
-    $class_section = $class['CLASS_SECTION'];
-    $class_time = $class['CLASS_TIME'];
-    $crs_code = $class['CRS_CODE'];
-    $prof_num = $class['PROF_NUM'];
-    $room_code = $class['ROOM_CODE'];
-    $semester_code = $class['SEMESTER_CODE'];
+    $class_code = $class['class_code'];
+    $class_section = $class['class_section'];
+    $class_time = $class['class_time'];
+    $crs_code = $class['crs_code'];
+    $prof_num = $class['prof_num'];
+    $room_code = $class['room_code'];
+    $semester_code = $class['semester_code'];
+    
+    $attachment = $pdo->prepare("SELECT * FROM medias WHERE entity_id = :entity_id AND entity_type = :entity_type");
+    $attachment->bindParam(':entity_id', $class_code);
+    $attachment->bindParam(':entity_type', $entity_type);
+    $attachment->execute();
+    $attachment = $attachment->fetch();
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
@@ -55,7 +61,7 @@ try {
         <div class="row">
             <div class="col-6 m-auto">
                 <h1 class="text-center mb-5">Update Class</h1>
-                <form class="form" action="update.php" method="post">
+                <form class="form" action="update.php" method="post" enctype="multipart/form-data">
                     <div class="row mb-3">
                         <label for="class_code" class="col-3">Class Code</label>
                         <div class="col-9">
@@ -79,9 +85,9 @@ try {
                         <div class="col-9">
                             <select class="form-select" name="crs_code" id="crs_code">
                                 <?php foreach ($courses as $row) : ?>
-                                    <option value="<?php echo $row['CRS_CODE'] ?>"
-                                        <?php echo ($row['CRS_CODE'] == $crs_code) ? 'selected' : ''; ?>>
-                                        <?php echo $row['CRS_TITLE']; ?>
+                                    <option value="<?php echo $row['crs_code'] ?>"
+                                        <?php echo ($row['crs_code'] == $crs_code) ? 'selected' : ''; ?>>
+                                        <?php echo $row['crs_title']; ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
@@ -92,9 +98,9 @@ try {
                         <div class="col-9">
                             <select class="form-select" name="prof_num" id="prof_num">
                                 <?php foreach ($professors as $row) : ?>
-                                    <option value="<?php echo $row['PROF_NUM'] ?>"
-                                        <?php echo ($row['PROF_NUM'] == $prof_num) ? 'selected' : ''; ?>>
-                                        <?php echo $row['PROF_LNAME'] . " " . $row['PROF_FNAME'] ?>
+                                    <option value="<?php echo $row['prof_num'] ?>"
+                                        <?php echo ($row['prof_num'] == $prof_num) ? 'selected' : ''; ?>>
+                                        <?php echo $row['prof_lname'] . " " . $row['prof_fname'] ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
@@ -105,8 +111,8 @@ try {
                         <div class="col-9">
                             <select class="form-select" name="room_code" id="room_code">
                                 <?php foreach ($rooms as $row) : ?>
-                                    <option value="<?php echo $row['ROOM_CODE'] ?>"<?php echo ($row['ROOM_CODE'] == $room_code) ? 'selected' : ''; ?>>
-                                        <?php echo $row['ROOM_CODE']; ?>
+                                    <option value="<?php echo $row['room_code'] ?>"<?php echo ($row['room_code'] == $room_code) ? 'selected' : ''; ?>>
+                                        <?php echo $row['room_code']; ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
@@ -117,11 +123,29 @@ try {
                         <div class="col-9">
                             <select class="form-select" name="semester_code" id="semester_code">
                                 <?php foreach ($semesters as $row) : ?>
-                                    <option value="<?php echo $row['SEMESTER_CODE'] ?>"<?php echo ($row['SEMESTER_CODE'] == $semester_code) ? 'selected' : ''; ?>>
-                                        <?php echo $row['SEMESTER_CODE']; ?>
+                                    <option value="<?php echo $row['semester_code'] ?>"<?php echo ($row['semester_code'] == $semester_code) ? 'selected' : ''; ?>>
+                                        <?php echo $row['semester_code']; ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="file" class="col-3">Attachment</label>
+                        <div class="col-7">
+                            <input type="file" name="file" id="file" class="form-control">
+                        </div>
+                        <div class="col-2">
+                            <?php if ($attachment) : ?>
+                                <?php if ($attachment['media_type'] === 'image') : ?>
+                                    <img src="./../images/<?php echo $attachment['media_url']; ?>" alt="Image" class="img-fluid">
+                                <?php elseif ($attachment['media_type'] === 'attachment') : ?>
+                                    <a href="./../images/<?php echo $attachment['media_url']; ?>" target="_blank">Open File</a>
+                                <?php endif; ?>
+
+                                <?php else : ?>
+                                    No File
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="mt-4">
@@ -132,7 +156,7 @@ try {
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

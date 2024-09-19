@@ -63,9 +63,9 @@ class School implements CRUDable
             $statement->bindParam(':prof_num', $this->prof_num, PDO::PARAM_INT);
             $statement->execute();
 
-            $statement = $this->pdo->prepare("SELECT school_code FROM schools ORDER BY school_code DESC OFFSET 0 ROW FETCH NEXT 1 ROW ONLY");
+            $statement = $this->pdo->prepare("SELECT school_code FROM schools ORDER BY school_code DESC LIMIT 1 OFFSET 0;");
             $statement->execute();
-            $this->school_code = (int) $statement->fetch()['SCHOOL_CODE'];
+            $this->school_code = (int) $statement->fetch()['school_code'];
 
             $this->media->save($this->file, $this->pdo, "image", $this->school_code, "school");
 
@@ -99,8 +99,8 @@ class School implements CRUDable
 
             $professor = [];
             if ($school) {
-                $statement = $this->pdo->prepare("SELECT prof_fname || ' ' || prof_lname AS full_name FROM professors WHERE prof_num = :prof_num");
-                $statement->bindParam(':prof_num', $school['PROF_NUM']);
+                $statement = $this->pdo->prepare("SELECT prof_num, CONCAT(prof_fname, ' ', prof_lname)  AS full_name FROM professors WHERE prof_num = :prof_num");
+                $statement->bindParam(':prof_num', $school['prof_num']);
                 $statement->execute();
                 $professor = $statement->fetch(PDO::FETCH_ASSOC);
             }
@@ -126,26 +126,36 @@ class School implements CRUDable
     public function update(): void
     {
         try {
+            // Start the transaction
             $this->pdo->beginTransaction();
+
+            // Prepare and execute the update statement
             $statement = $this->pdo->prepare("UPDATE schools
-                SET school_name = :school_name,
-                    prof_num = :prof_num
-                WHERE school_code = :school_code");
+            SET school_name = :school_name,
+                prof_num = :prof_num
+            WHERE school_code = :school_code");
 
             $statement->bindParam(':school_code', $this->school_code, PDO::PARAM_INT);
             $statement->bindParam(':school_name', $this->school_name, PDO::PARAM_STR);
             $statement->bindParam(':prof_num', $this->prof_num, PDO::PARAM_INT);
             $statement->execute();
 
-            $this->media->save($this->file, $this->pdo, "image", (int) $this->school_code, "school");
+            if (isset($this->file['file']) && $this->file['file']['error'] === UPLOAD_ERR_OK) {
+                $this->media->save($this->file, $this->pdo, "image", (int) $this->school_code, "school");
+            } else {
+                echo 'No file uploaded or there was an upload error. Error code: ' . ($this->file['file']['error'] ?? 'no file uploaded');
+            }
 
             $this->pdo->commit();
+
             header('Location: index.php');
         } catch (PDOException $e) {
+            // Rollback the transaction in case of error
             $this->pdo->rollBack();
             echo "Error: " . $e->getMessage();
         }
     }
+
 
     public function delete(): void
     {

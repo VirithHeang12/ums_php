@@ -1,6 +1,7 @@
 <?php 
 
 require_once __DIR__ . '/../database/database_connection.php';
+require_once __DIR__ . '/../authentication/student_authorization_check.php';
 
 try {
   $statement1 = $pdo->prepare("SELECT school_code FROM schools");
@@ -30,7 +31,7 @@ try {
    <h1 class="text-center">Create Department</h1>
     <a href="index.php" class="btn btn-danger mb-3" role="button">Back</a>
     <div class="col-6 mx-auto">
-    <form action="save.php" method="post" class="form mx-auto shadow-sm p-3">
+    <form action="save.php" method="post" class="form mx-auto shadow-sm p-3" enctype="multipart/form-data">
 
         <label for="dept_name" class="form-label">Department Name</label>
         <input type="text" name="dept_name" id="dept_name" class="form-control mb-2">
@@ -39,8 +40,8 @@ try {
         <select class="form-control mb-2" id="school_code" name="school_code" required>
             <option value="">Select School</option>
             <?php foreach ($schools as $school): ?>
-                <option value="<?php echo htmlspecialchars($school['SCHOOL_CODE']); ?>">
-                    <?php echo htmlspecialchars($school['SCHOOL_CODE']); ?>
+                <option value="<?php echo htmlspecialchars($school['school_code']); ?>">
+                    <?php echo htmlspecialchars($school['school_code']); ?>
                 </option>
             <?php endforeach; ?>
         </select>
@@ -49,11 +50,13 @@ try {
         <select class="form-control mb-2" id="prof_num" name="prof_num" required>
             <option value="">Select Professor</option>
             <?php foreach ($professors as $professor): ?>
-                <option value="<?php echo htmlspecialchars($professor['PROF_NUM']); ?>">
-                    <?php echo htmlspecialchars($professor['PROF_NUM']); ?>
+                <option value="<?php echo htmlspecialchars($professor['prof_num']); ?>">
+                    <?php echo htmlspecialchars($professor['prof_num']); ?>
                 </option>
             <?php endforeach; ?>
         </select>
+        <br>
+        <input type="file" name="file" id="file" class="form-control mb-2">
 
         <button type="submit" class="btn btn-primary mt-3">Create</button>
     </form>

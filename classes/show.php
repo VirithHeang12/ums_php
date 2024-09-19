@@ -3,14 +3,15 @@
 require_once __DIR__ . '/../database/database_connection.php';
 
 $class_code = $_GET['id'];
+$entity_type = 'class';
 
 try {
     $statement = $pdo->prepare("
-        SELECT c.*, (p.PROF_LNAME || ' ' || p.PROF_FNAME) PROF_NAME, crs.CRS_TITLE 
+        SELECT c.*, CONCAT(p.PROF_LNAME, ' ', p.PROF_FNAME) AS PROF_NAME, crs.CRS_TITLE
         FROM classes c
         JOIN professors p ON c.PROF_NUM = p.PROF_NUM
         JOIN courses crs ON c.CRS_CODE = crs.CRS_CODE
-        WHERE c.CLASS_CODE = :class_code
+        WHERE c.CLASS_CODE = :class_code;
     ");
     $statement->bindParam(':class_code', $class_code);
     $statement->execute();
@@ -20,6 +21,12 @@ try {
     $statement->bindParam(':class_code', $class_code);
     $statement->execute();
     $enrolls = $statement->fetch();
+    
+    $attachment = $pdo->prepare("SELECT * FROM medias WHERE entity_id = :entity_id AND entity_type = :entity_type");
+    $attachment->bindParam(':entity_id', $class_code);
+    $attachment->bindParam(':entity_type', $entity_type);
+    $attachment->execute();
+    $attachment = $attachment->fetch();
 
 } catch (PDOException $e) {
     echo "Error while retrieving classes: " . $e->getMessage();
@@ -47,15 +54,15 @@ try {
                 <table class="table">
                     <tr>
                         <th>CLASS CODE</th>
-                        <td><?php echo $classes['CLASS_CODE'] ?></td>
+                        <td><?php echo $classes['class_code'] ?></td>
                     </tr>
                     <tr>
                         <th>CLASS SECTION</th>
-                        <td><?php echo $classes['CLASS_SECTION']; ?></td>
+                        <td><?php echo $classes['class_section']; ?></td>
                     </tr>
                     <tr>
                         <th>CLASS TIME</th>
-                        <td><?php echo $classes['CLASS_TIME'] ?></td>
+                        <td><?php echo $classes['class_time'] ?></td>
                     </tr>
                     <tr>
                         <th>COURSES TITLE</th>
@@ -67,15 +74,30 @@ try {
                     </tr>
                     <tr>
                         <th>ROOM CODE</th>
-                        <td><?php echo $classes['ROOM_CODE']; ?></td>
+                        <td><?php echo $classes['room_code']; ?></td>
                     </tr>
                     <tr>
                         <th>SEMESTER CODE</th>
-                        <td><?php echo $classes['SEMESTER_CODE'];  ?></td>
+                        <td><?php echo $classes['semester_code'];  ?></td>
                     </tr>
                     <tr>
                         <th>ENROLLS</th>
-                        <td><?php echo $enrolls['NUM_ENROLL'];  ?></td>
+                        <td><?php echo $enrolls['num_enroll'];  ?></td>
+                    </tr>
+                    <tr>
+                        <th class="col-5">ATTACHMENT</th>
+                        <td>
+                            <?php if ($attachment) : ?>
+                                <?php if ($attachment['media_type'] === 'image') : ?>
+                                    <img src="./../images/<?php echo $attachment['media_url']; ?>" alt="Image" class="img-fluid">
+                                <?php elseif ($attachment['media_type'] === 'attachment') : ?>
+                                    <a href="./../images/<?php echo $attachment['media_url']; ?>" target="_blank">មើល</a>
+                                <?php endif; ?>
+
+                            <?php else : ?>
+                                No attachment
+                            <?php endif; ?>
+                        </td>
                     </tr>
                 </table>
             </div>

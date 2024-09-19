@@ -10,12 +10,12 @@ try {
     $statement->execute();
     $semester = $statement->fetch();
 
-
     $attachment = $pdo->prepare("SELECT * FROM medias WHERE entity_id = :entity_id AND entity_type = :entity_type");
     $attachment->bindParam(':entity_id', $semester_code);
     $attachment->bindParam(':entity_type', $entity_type);
     $attachment->execute();
     $attachment = $attachment->fetch();
+
 } catch (PDOException $e) {
     echo "Error while retrieving semester:" . $e->getMessage();
 }
@@ -56,10 +56,12 @@ try {
             </div>
             
             <label for="semester_start_date" class="form-label fw-medium">Start Date</label>
-            <?php $startDate = DateTime::createFromFormat('d-M-y', $semester['semester_start_date'])->format('Y-m-d') ?>
+            <?php $startDate = new DateTime($semester['semester_start_date'])?>
+            <?php $startDate = $startDate->format('Y-m-d')?>
             <input type="date" name="semester_start_date" id="semester_start_date" class="form-control mb-3" value="<?= $startDate ?>">
             
-            <?php $endDate = DateTime::createFromFormat('d-M-y', $semester['semester_end_date'])->format('Y-m-d') ?>
+            <?php $endDate = new DateTime($semester['semester_end_date'])?>
+            <?php $endDate = $endDate->format('Y-m-d')?>
             <label for="semester_end_date" class="form-label fw-medium">End Date</label>
             <input type="date" name="semester_end_date" id="semester_end_date" class="form-control mb-3" value="<?= $endDate ?>">
 
@@ -67,7 +69,7 @@ try {
 
             <?php if ($attachment) : ?>
                 <?php if ($attachment['media_type'] === 'image') : ?>
-                    <img src="./../images/<?php echo $attachment['MEDIA_URL']; ?>" alt="Image" class="img-fluid">
+                    <img src="./../images/<?php echo $attachment['media_url']; ?>" alt="Image" class="img-fluid">
                 <?php elseif ($attachment['media_type'] === 'attachment') : ?>
                     <a href="./../images/<?php echo $attachment['media_url']; ?>" target="_blank">មើល</a>
                  <?php endif; ?>

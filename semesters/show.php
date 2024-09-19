@@ -16,7 +16,7 @@ try {
     $attachment->bindParam(':entity_id', $semester_code);
     $attachment->bindParam(':entity_type', $entity_type);
     $attachment->execute();
-    $attachment = $attachment->fetchAll();
+    $attachment = $attachment->fetch();
 
     $classes = $statement->fetchAll();
 } catch (PDOException $e) {
@@ -45,32 +45,32 @@ try {
                 <table class="table">
                     <tr>
                         <th class="col-5">SEMESTER CODE</th>
-                        <td><?php echo $semester['SEMESTER_CODE']; ?></td>
+                        <td><?php echo $semester['semester_code']; ?></td>
                     </tr>
                     <tr>
                         <th class="col-5">SEMESTER YEAR</th>
-                        <td><?php echo $semester['SEMESTER_YEAR']; ?></td>
+                        <td><?php echo $semester['semester_year']; ?></td>
                     </tr>
                     <tr>
                         <th class="col-5">SEMESTER TERM</th>
-                        <td><?php echo $semester['SEMESTER_TERM']; ?></td>
+                        <td><?php echo $semester['semester_term']; ?></td>
                     </tr>
                     <tr>
                         <th class="col-5">START DATE</th>
-                        <td><?php echo date('F d, Y', strtotime($semester['SEMESTER_START_DATE'])); ?></td>
+                        <td><?php echo date('F d, Y', strtotime($semester['semester_start_date'])); ?></td>
                     </tr>
                     <tr>
                         <th class="col-5">END DATE</th>
-                        <td><?php echo date('F d, Y', strtotime($semester['SEMESTER_END_DATE'])); ?></td>
+                        <td><?php echo date('F d, Y', strtotime($semester['semester_end_date'])); ?></td>
                     </tr>
                     <tr>
                         <th class="col-5">ATTACHMENT</th>
                         <td>
                             <?php if ($attachment) : ?>
-                                <?php if ($attachment['MEDIA_TYPE'] === 'image') : ?>
-                                    <img src="./../images/<?php echo $attachment['MEDIA_URL']; ?>" alt="Image" class="img-fluid">
-                                <?php elseif ($attachment['MEDIA_TYPE'] === 'attachment') : ?>
-                                    <a href="./../images/<?php echo $attachment['MEDIA_URL']; ?>" target="_blank">មើល</a>
+                                <?php if ($attachment['media_type'] === 'image') : ?>
+                                    <img src="./../images/<?php echo $attachment['media_url']; ?>" alt="Image" class="img-fluid">
+                                <?php elseif ($attachment['media_type'] === 'attachment') : ?>
+                                    <a href="./../images/<?php echo $attachment['media_url']; ?>" target="_blank">មើល</a>
                                 <?php endif; ?>
 
                             <?php else : ?>
@@ -100,10 +100,10 @@ try {
                     <tbody>
                         <?php foreach ($classes as $row): ?>
                             <tr align="center" class="align-middle">
-                                <td><?php echo $row['CLASS_CODE']; ?></td>
-                                <td><?php echo $row['CLASS_SECTION']; ?></td>
-                                <td><?php echo $row['CLASS_TIME']; ?></td>
-                                <td><?php echo $row['ROOM_CODE']; ?></td>
+                                <td><?php echo $row['class_code']; ?></td>
+                                <td><?php echo $row['class_section']; ?></td>
+                                <td><?php echo $row['class_time']; ?></td>
+                                <td><?php echo $row['room_code']; ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
