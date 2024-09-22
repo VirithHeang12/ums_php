@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/../authentication/student_authorization_check.php';
+require_once __DIR__ . '/../authentication/admin_authorization_check.php';
 
 
 

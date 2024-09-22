@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../database/database_connection.php';
 require_once __DIR__ . '/../models/Department.php';
-require_once __DIR__ . '/../authentication/student_authorization_check.php';
+require_once __DIR__ . '/../authentication/admin_authorization_check.php';
 
 $dept_code = (int) ($_POST['dept_code'] ?? 1);  
 $dept_name = $_POST['dept_name'] ?? '';

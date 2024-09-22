@@ -8,6 +8,7 @@ $entity_type = $_POST['entity_type'] ?? '';
 $entity_id = $_POST['entity_id'] ?? '';
 $role_id = $_POST['role_id'] ?? '';
 
+
 try {
     $pdo->beginTransaction();
 

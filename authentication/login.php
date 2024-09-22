@@ -30,9 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         session_start();
 
         $_SESSION['user'] = [
-            'id'        => $user['user_id'],
-            'username'  => $user['username'],
-            'role'      => $user['role_id']
+            'id'            => $user['user_id'],
+            'username'      => $user['username'],
+            'role'          => $user['role_id'],
+            'entity_id'     => $user['entity_id'],
+            'entity_type'   => $user['entity_type']
         ];
         header('Location: ../index.php');
         die();
@@ -73,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <nav>
                 <ul>
                     <?php if (!$isLoggedIn) : ?>
-                        <li><a href="./">ទំព័រ</a></li>
+                        <li><a href="./">ទំព័រដើម</a></li>
                         <li><a href="authentication/login">ចូល</a></li>
                         <li><a href="authentication/register">ចុះឈ្មោះ</a></li>
                     <?php else : ?>

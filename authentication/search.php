@@ -48,15 +48,15 @@ try {
         </tr>
         <?php foreach ($students as $row) : ?>
             <tr>
-                <td><?php echo $row['STU_NUM'] ?></td>
-                <td><?php echo $row['DEPT_CODE']; ?></td>
-                <td><?php echo $row['STU_FNAME']; ?></td>
-                <td><?php echo $row['STU_LNAME']; ?></td>
-                <td><?php echo $row['STU_INITIAL']; ?></td>
-                <td><?php echo $row['STU_EMAIL']; ?></td>
-                <td><?php echo $row['PROF_NUM']; ?></td>
+                <td><?php echo $row['stu_num'] ?></td>
+                <td><?php echo $row['dept_code']; ?></td>
+                <td><?php echo $row['stu_fname']; ?></td>
+                <td><?php echo $row['stu_lname']; ?></td>
+                <td><?php echo $row['stu_initial']; ?></td>
+                <td><?php echo $row['stu_email']; ?></td>
+                <td><?php echo $row['prof_num']; ?></td>
                 <td>
-                    <a href="register.php?<?php echo http_build_query(['id' => $row['STU_NUM'], 'type' => 'Student']); ?>">Select</a>
+                    <a href="register.php?<?php echo http_build_query(['id' => $row['stu_num'], 'type' => 'Student']); ?>">Select</a>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -73,13 +73,13 @@ try {
         </tr>
         <?php foreach ($professors as $row) : ?>
             <tr>
-                <td><?php echo $row['PROF_NUM'] ?></td>
-                <td><?php echo $row['DEPT_CODE']; ?></td>
-                <td><?php echo $row['PROF_SPECIALTY']; ?></td>
-                <td><?php echo $row['PROF_FNAME'] . ' ' . $row['PROF_INITIAL'] . ' ' . $row['PROF_LNAME']; ?></td>
-                <td><?php echo $row['PROF_EMAIL']; ?></td>
+                <td><?php echo $row['prof_num'] ?></td>
+                <td><?php echo $row['dept_code']; ?></td>
+                <td><?php echo $row['prof_specialty']; ?></td>
+                <td><?php echo $row['prof_fname'] . ' ' . $row['prof_initial'] . ' ' . $row['prof_lname']; ?></td>
+                <td><?php echo $row['prof_email']; ?></td>
                 <td>
-                    <a href="register.php?<?php echo http_build_query(['id' => $row['PROF_NUM'], 'type' => 'Professor']); ?>">Select</a>
+                    <a href="register.php?<?php echo http_build_query(['id' => $row['prof_num'], 'type' => 'Professor']); ?>">Select</a>
                 </td>
             </tr>
         <?php endforeach; ?>
