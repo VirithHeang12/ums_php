@@ -8,6 +8,8 @@ if (isset($_SESSION['user'])) {
     $isLoggedIn = true;
 }
 
+
+
 ?>
 
 
@@ -29,9 +31,8 @@ if (isset($_SESSION['user'])) {
             <nav>
                 <ul>
                     <?php if (!$isLoggedIn) : ?>
-                        <li><a href="./">ទំព័រ</a></li>
+                        <li><a href="">ទំព័រដើម</a></li>
                         <li><a href="authentication/login.php">ចូល</a></li>
-                        <li><a href="authentication/register.php">ចុះឈ្មោះ</a></li>
                     <?php else : ?>
                         <?php if ($_SESSION['user']['role'] == 1) : ?>
                             <li><a href="professors">គ្រូ</a></li>
@@ -42,6 +43,7 @@ if (isset($_SESSION['user'])) {
                             <li><a href="classes">ថ្នាក់រៀន</a></li>
                             <li><a href="semesters">ឆមាស</a></li>
                             <li><a href="departments">ដេប៉ាតឺម៉ង់</a></li>
+                            <li><a href="authentication/register.php">បង្កើតគណនី</a></li>
                         <?php elseif ($_SESSION['user']['role'] == 2) : ?>
                             <li><a href="students">និស្សិត</a></li>
                             <li><a href="courses">វគ្គសិក្សា</a></li>
@@ -50,7 +52,9 @@ if (isset($_SESSION['user'])) {
                         <?php endif; ?>
                         <?php if ($_SESSION['user']['role'] == 3) : ?>
                             <li><a href="courses">វគ្គសិក្សា</a></li>
-                            <li><a href="classes">ថ្នាក់រៀន</a></li>
+                            <li><a href="enrolls">ថ្នាក់រៀន</a></li>
+                            <li><a href="profile">ព័ត៌មានផ្ទាល់ខ្លួន</a></li>
+
                         <?php endif; ?>
                         <li><a href="authentication/logout.php">ចេញ</a></li>
                     <?php endif; ?>              

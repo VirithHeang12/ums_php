@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../database/database_connection.php';
+require_once __DIR__ . '/../authentication/admin_authorization_check.php';
 
 
 $id = $_GET['id'] ?? null;
@@ -12,6 +13,7 @@ try {
     $statement = $pdo->prepare("SELECT * FROM roles");
     $statement->execute();
     $roles = $statement->fetchAll();
+
 } catch (PDOException $e) {
     echo "Error while retrieving roles: " . $e->getMessage();
 }
@@ -42,17 +44,17 @@ try {
             <br>
             <label for="entity_type">Type</label>
             <select name="entity_type" id="entity_type">
-                <option value="student" <?php echo $type === "Student" ? "selected" : "" ?>>Student</option>
-                <option value="professor" <?php echo $type === "Professor" ? "selected" : "" ?>>Professor</option>
+                <option value="Student" <?php echo $type === "Student" ? "selected" : "" ?>>Student</option>
+                <option value="Professor" <?php echo $type === "Professor" ? "selected" : "" ?>>Professor</option>
             </select>
             <br>
             <label for="entity_id">ID</label>
-            <input type="number" name="entity_id" id="entity_id" value="<?php echo $id ?>">
+            <input readonly type="number" name="entity_id" id="entity_id" value="<?php echo $id ?>">
             <br>
             <label for="role_id">Role</label>
             <select name="role_id" id="role_id">
                 <?php foreach ($roles as $role) : ?>
-                    <option value="<?php echo $role['ROLE_ID'] ?>"><?php echo $role['ROLE_NAME'] ?></option>
+                    <option value="<?php echo $role['role_id'] ?>"><?php echo $role['role_name'] ?></option>
                 <?php endforeach; ?>
             </select>
             <button type="submit">Sign Up</button>
