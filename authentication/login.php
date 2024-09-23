@@ -74,9 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <nav>
                 <ul>
                     <?php if (!$isLoggedIn) : ?>
-                        <li><a href="./">ទំព័រដើម</a></li>
-                        <li><a href="authentication/login">ចូល</a></li>
-                        <li><a href="authentication/register">ចុះឈ្មោះ</a></li>
+                        <li><a href="../">ទំព័រដើម</a></li>
+                        <li><a href="login">ចូល</a></li>
                     <?php else : ?>
                         <li><a href="professors">គ្រូ</a></li>
                         <li><a href="students">និស្សិត</a></li>
