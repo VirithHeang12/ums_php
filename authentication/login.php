@@ -64,7 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>University Welcome Page</title>
-    <link rel="stylesheet" href="/ums_php/public/styles.css">
+    <!-- <link rel="stylesheet" href="/ums_php/public/styles.css"> -->
+    <link rel="stylesheet" href="../public/styles.css">
 </head>
 
 <body>
